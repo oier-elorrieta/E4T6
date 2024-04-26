@@ -6,7 +6,7 @@ package Modelo;
 public class Artista {
     protected int id;
     protected String izena;
-    protected byte[] irudia;
+    protected String irudia;
     
     /**
      * Artista objektua sortzen du ID, izena eta irudia zehaztuak erabiliz.
@@ -15,7 +15,7 @@ public class Artista {
      * @param izena Artistaren artistikoa izena.
      * @param irudia Artistaren irudia.
      */
-    public Artista(int id, String izena, byte[] irudia) {
+    public Artista(int id, String izena, String irudia) {
         this.id = id;
         this.izena = izena;
         this.irudia = irudia;
@@ -62,7 +62,7 @@ public class Artista {
      * 
      * @return Artistaren irudia.
      */
-    public byte[] getIrudia() {
+    public String getIrudia() {
         return irudia;
     }
 
@@ -71,7 +71,7 @@ public class Artista {
      * 
      * @param irudia Ezarri behar den Artistaren irudia.
      */
-    public void setIrudia(byte[] irudia) {
+    public void setIrudia(String irudia) {
         this.irudia = irudia;
     }
 
