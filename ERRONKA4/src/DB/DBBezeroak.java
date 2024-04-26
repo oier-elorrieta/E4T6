@@ -55,14 +55,14 @@ import javax.swing.JOptionPane;
 	        try(Connection conn = konektatu();
 	             PreparedStatement stmt = conn.prepareStatement("SELECT Erabiltzailea, Pasahitza FROM bezeroa WHERE Erabiltzailea = ? AND Pasahitza = ?")) {
 	            
-	            // Establecer los valores de los parámetros
+	           
 	            stmt.setString(1, Erabiltzailea);
 	            stmt.setString(2, Pasahitza);
 	            
 	            ResultSet rs = stmt.executeQuery();
 	            
 	            if (rs.next()) {
-	                return true; // Si encuentra un usuario con estas credenciales, devuelve true
+	                return true; 
 	            } else {
 	                throw new SQLException("Credenciales incorrectas");
 	            }
@@ -71,10 +71,9 @@ import javax.swing.JOptionPane;
 	            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 	        }
 	        
-	        return false; // Si no encuentra un usuario con estas credenciales, devuelve false
+	        return false; 
 	    }
-	    
-	    
+	    	
 	    public static void BezeroaGorde(Bezeroa nb) {
 	    	
 	    try {
@@ -126,56 +125,68 @@ import javax.swing.JOptionPane;
 
 	    }} 
 	    
+	    public static int idBezeroLortu(Bezeroa nb) {
+    	    int idBezeroa = -1;
+    	    try (Connection conn = konektatu();
+    	         PreparedStatement stmt = conn.prepareStatement("SELECT IDBezeroa FROM bezeroa WHERE Erabiltzailea = ?")) {
+
+    	        // Establecer los valores de los parámetros
+    	        stmt.setString(1, nb.getErabiltzailea());
+
+    	        ResultSet rs = stmt.executeQuery();
+
+    	        if (rs.next()) {
+    	            idBezeroa = rs.getInt("IDBezeroa"); 
+    	        } else {
+    	            throw new SQLException("Credenciales incorrectas");
+    	        }
+    	    } catch (SQLException e) {
+    	        System.err.println("Error de base de datos: " + e.getMessage());
+    	        JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    	    }
+
+    	    return idBezeroa;
+    	}
+    
+	    
 	    public static String getDataGaur() {
 	        LocalDate dataGaur = LocalDate.now();
 	        
 	        //Data Stringera aldatzen du
-	        String sdataGaur = dataGaur.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+	        String sdataGaur = dataGaur.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
 	           
 	        return sdataGaur;
 	   }
 	    
-	    public static void premium(Bezeroa nb) {
+	    public static void PremiumDataGorde(int idBezeroa, String data) {
 	    	
 	        try {
 
 	            Connection connection = konektatu();
 
 	            if (connection != null) {	
-	            	
-	            	
-	            	
-	                String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	                
+	            
+	                String kontsulta = "INSERT INTO Premium (IDBezeroa, Iraungitze_data) VALUES (?, ?)";
+	            
 	      
-	                PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
+	                PreparedStatement PreparedStatement = connection.prepareStatement(kontsulta);
 
-	                preparedStatement.setString(1, nb.getIzena());
+	                PreparedStatement.setInt(1, idBezeroa);
+	                PreparedStatement.setString(2, data);
 
-	                preparedStatement.setString(2, nb.getAbizena());
-
-	                preparedStatement.setString(3, nb.getHizkuntza());
-	                
-	                preparedStatement.setString(4, nb.getErabiltzailea());
-	                
-	                preparedStatement.setString(5, nb.getPasahitza());
-	             
-	                preparedStatement.setDate(6, new java.sql.Date(nb.getJaiotzedata().getTime()));
-	               
-	                preparedStatement.setDate(7, new java.sql.Date(nb.getErregistrodata().getTime()));
-	                
-	                int eragindakoErrenkadak = preparedStatement.executeUpdate();
+	            
+	                int eragindakoErrenkadak = PreparedStatement.executeUpdate();
 	                
 	                if (eragindakoErrenkadak > 0) {
 
-	                    System.out.println("Bezeroa zuzen gehitu da datu-basera.");
+	                    System.out.println("Data zuzen txertatu da");
 
 	                } else {
 
 	                    System.out.println("Errorea: Ezin izan da bezeroa datu-basera gehitu.");
 	                }
 
-	                preparedStatement.close();
+	                PreparedStatement.close();
 
 	                connection.close();
 
@@ -188,7 +199,7 @@ import javax.swing.JOptionPane;
 	        }
 	    }
 	    
-	    public static List<String> MusicaDescubritu() {
+	    public static List<String> MusikaDescubritu() {
 	        List<String> emaitza = new ArrayList<>();
 
 	        try {
@@ -201,9 +212,9 @@ import javax.swing.JOptionPane;
 
 	                ResultSet resultSet = preparedStatement.executeQuery();
 
-	                // Procesar los resultados de la consulta y agregarlos al ArrayList
+	              
 	                while (resultSet.next()) {
-	                    // Suponiendo que la columna que deseas obtener se llama 'nombre_columna'
+	                   
 	                    emaitza.add(resultSet.getString("IzenArtistikoa"));
 	                }
 
@@ -213,7 +224,7 @@ import javax.swing.JOptionPane;
 	            }
 
 	        } catch (SQLException e) {
-	            // Manejo de excepciones
+	           
 	            System.out.println("Errorea bezeroa datu-baseari eranstean: " + e.getMessage());
 	        }
 
@@ -233,9 +244,9 @@ import javax.swing.JOptionPane;
 
 	                ResultSet resultSet = preparedStatement.executeQuery();
 
-	                // Procesar los resultados de la consulta y agregarlos al ArrayList
+	               
 	                while (resultSet.next()) {
-	                    // Suponiendo que la columna que deseas obtener se llama 'nombre_columna'
+	                 
 	                    emaitza.add(resultSet.getString("Izenburua"));
 	                    
 	                }

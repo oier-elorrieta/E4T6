@@ -1,13 +1,9 @@
 package Vista;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import DB.DBBezeroak;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -17,9 +13,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * LogIn klasea erabiltzaile autentifikazioaren pantaila da.
- */
 public class LogIn extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -27,32 +20,11 @@ public class LogIn extends JFrame {
     private JTextField textFieldErabiltzailea;
     private JTextField textFieldPasahitza;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    // Sortu eta bistaratu LogIn framea
-                    LogIn frame = new LogIn();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
-     * Sortu LogIn framea.
-     */
     public LogIn() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
@@ -89,14 +61,12 @@ public class LogIn extends JFrame {
         JButton LogInBotoia = new JButton("LogIn");
         LogInBotoia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Erabiltzailearen eta pasahitzaren balidazioa egiten da
                 String Erabiltzailea = textFieldErabiltzailea.getText();
                 String Pasahitza = textFieldPasahitza.getText();
                 
                 boolean isloginok = DBBezeroak.isLoginOk(Erabiltzailea, Pasahitza);
         
-                if(isloginok == true) {
-                    // Menua framea sortu eta bistaratu
+                if(isloginok) {
                     Menua menua = new Menua();
                     menua.setVisible(true);
                 }
@@ -113,10 +83,9 @@ public class LogIn extends JFrame {
         ErregistratuBotoia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Sortu Erregistroa framea eta ezkutatu LogIn framea
                 Erregistroa erregistroaFrame = new Erregistroa();
                 erregistroaFrame.setVisible(true);
-                setVisible(false); // Ezkutatu LogIn framea
+                setVisible(false);
             }
         });
     }

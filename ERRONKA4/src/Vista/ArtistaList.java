@@ -1,18 +1,17 @@
 package Vista;
 
-import java.awt.EventQueue;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import DB.DBBezeroak;
 import javax.swing.DefaultComboBoxModel;
+import DB.DBBezeroak;
 
 public class ArtistaList extends JFrame {
 
@@ -20,25 +19,6 @@ public class ArtistaList extends JFrame {
     private JPanel contentPane;
     private int comboboxaukera;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ArtistaList frame = new ArtistaList();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
-     * Create the frame.
-     */
     public ArtistaList() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -53,22 +33,20 @@ public class ArtistaList extends JFrame {
         comboBox.setBounds(51, 79, 346, 44);
         contentPane.add(comboBox);
         
-        List<String> musikariak = DBBezeroak.MusicaDescubritu();
+        List<String> musikariak = DBBezeroak.MusikaDescubritu();
         for (String artista : musikariak) {
             comboBox.addItem(artista); 
         }
         
         comboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int comboxaukera = comboBox.getSelectedIndex();
+               comboboxaukera = comboBox.getSelectedIndex();
            
-                Artista artistaframe= new Artista(comboxaukera);
+                Artista artistaframe= new Artista(comboboxaukera);
                 artistaframe.setVisible(true);
                 setVisible(false);
                 
             }
-            
-            
         }); 
 
         JButton AtzeraBotoia = new JButton("Atzera");
