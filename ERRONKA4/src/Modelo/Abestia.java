@@ -2,12 +2,16 @@ package Modelo;
 
 import java.util.Objects;
 
-public class Abestia {
+public class Abestia extends Audio{
+	
+	public Abestia(int id, String izena, String erreprodukzioak, double iraupena) {
+		super(id, izena, erreprodukzioak, iraupena);
+		// TODO Auto-generated constructor stub
+	}
+
 	protected String ezaugarria;
 
-	public Abestia(String ezaugarria) {
-		this.ezaugarria = ezaugarria;
-	}
+	
 
 	public String getEzaugarria() {
 		return ezaugarria;

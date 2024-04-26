@@ -21,7 +21,7 @@ public class DBErregistroa {
 		        if (connection != null) {	
 		        	
 		        	
-		            String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		       String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		  
 		            PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
