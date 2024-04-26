@@ -3,7 +3,9 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import DB.DBBezeroak;
+
+import DB.DBLogIn;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -13,14 +15,14 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LogIn extends JFrame {
+public class LogInVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textFieldErabiltzailea;
     private JTextField textFieldPasahitza;
 
-    public LogIn() {
+    public LogInVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -64,10 +66,10 @@ public class LogIn extends JFrame {
                 String Erabiltzailea = textFieldErabiltzailea.getText();
                 String Pasahitza = textFieldPasahitza.getText();
                 
-                boolean isloginok = DBBezeroak.isLoginOk(Erabiltzailea, Pasahitza);
+                boolean isloginok = DBLogIn.isLoginOk(Erabiltzailea, Pasahitza);
         
                 if(isloginok) {
-                    Menua menua = new Menua();
+                    MenuaVi menua = new MenuaVi();
                     menua.setVisible(true);
                 }
             }
@@ -83,7 +85,7 @@ public class LogIn extends JFrame {
         ErregistratuBotoia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Erregistroa erregistroaFrame = new Erregistroa();
+                ErregistroaVi erregistroaFrame = new ErregistroaVi();
                 erregistroaFrame.setVisible(true);
                 setVisible(false);
             }

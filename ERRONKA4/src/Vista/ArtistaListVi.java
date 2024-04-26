@@ -11,15 +11,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import DB.DBBezeroak;
 
-public class ArtistaList extends JFrame {
+import DB.DBMenua;
+
+public class ArtistaListVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private int comboboxaukera;
 
-    public ArtistaList() {
+    public ArtistaListVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -28,21 +29,21 @@ public class ArtistaList extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {""}));
-        comboBox.setBounds(51, 79, 346, 44);
-        contentPane.add(comboBox);
+        JComboBox<String> musikariCBox = new JComboBox<>();
+        musikariCBox.setModel(new DefaultComboBoxModel(new String[] {""}));
+        musikariCBox.setBounds(51, 79, 346, 44);
+        contentPane.add(musikariCBox);
         
-        List<String> musikariak = DBBezeroak.MusikaDescubritu();
+        List<String> musikariak = DBMenua.MusikaDescubritu();
         for (String artista : musikariak) {
-            comboBox.addItem(artista); 
+            musikariCBox.addItem(artista); 
         }
         
-        comboBox.addActionListener(new ActionListener() {
+        musikariCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               comboboxaukera = comboBox.getSelectedIndex();
+               comboboxaukera = musikariCBox.getSelectedIndex();
            
-                Artista artistaframe= new Artista(comboboxaukera);
+                ArtistaVi artistaframe= new ArtistaVi(comboboxaukera);
                 artistaframe.setVisible(true);
                 setVisible(false);
                 
@@ -52,7 +53,7 @@ public class ArtistaList extends JFrame {
         JButton AtzeraBotoia = new JButton("Atzera");
         AtzeraBotoia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Menua menuaframe= new Menua();
+                MenuaVi menuaframe= new MenuaVi();
                 menuaframe.setVisible(true);
                 setVisible(false);
             }
@@ -66,7 +67,7 @@ public class ArtistaList extends JFrame {
 
         AurreraBotoia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Artista artistaframe = new Artista(0);
+                ArtistaVi artistaframe = new ArtistaVi(0);
                 artistaframe.setVisible(true);
                 setVisible(false);
             }

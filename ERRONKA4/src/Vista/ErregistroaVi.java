@@ -4,7 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DB.DBBezeroak;
+
+import DB.DBErregistroa;
 import Modelo.Bezeroa;
 
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Erregistroa extends JFrame {
+public class ErregistroaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -33,7 +34,7 @@ public class Erregistroa extends JFrame {
     private JTextField premiumMugaTextField;
     private JTextField abizenaTextField;
 
-    public Erregistroa() {
+    public ErregistroaVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -46,7 +47,7 @@ public class Erregistroa extends JFrame {
         contentPane.add(AtzeraBtn);
         AtzeraBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                LogIn loginframe = new LogIn();
+                LogInVi loginframe = new LogInVi();
                 loginframe.setVisible(true);
                 setVisible(false);
             }
@@ -166,7 +167,7 @@ public class Erregistroa extends JFrame {
                 java.sql.Date erregistroDate = new java.sql.Date(erregistroUtilDate.getTime());
 
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
-                DBBezeroak.BezeroaGorde(nb);
+                DBErregistroa.BezeroaGorde(nb);
             }
         });
 
@@ -197,7 +198,7 @@ public class Erregistroa extends JFrame {
                 java.sql.Date erregistroDate = new java.sql.Date(erregistroUtilDate.getTime());
 
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
-                DBBezeroak.BezeroaGorde(nb);
+                DBErregistroa.BezeroaGorde(nb);
 
                 try {
                     erregistroUtilDate = sdf.parse(erregistroDataTextField.getText());
@@ -221,7 +222,7 @@ public class Erregistroa extends JFrame {
                 // premiumMugaTextField-en testu-kate hori ezarri
                 premiumMugaTextField.setText(premiumMugaDataString);
 
-                DBBezeroak.PremiumDataGorde(DBBezeroak.idBezeroLortu(nb),premiumMugaDataString);
+                DBErregistroa.PremiumDataGorde(DBErregistroa.idBezeroLortu(nb),premiumMugaDataString);
             }
         });
     }

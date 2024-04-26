@@ -8,12 +8,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Menua extends JFrame {
+public class MenuaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    public Menua() {
+    public MenuaVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -26,7 +26,7 @@ public class Menua extends JFrame {
         contentPane.add(MusikaDeskubrituBtn);
         MusikaDeskubrituBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ArtistaList ArtistaListFrame = new ArtistaList();
+                ArtistaListVi ArtistaListFrame = new ArtistaListVi();
                 ArtistaListFrame.setVisible(true);
                 setVisible(false);
             }

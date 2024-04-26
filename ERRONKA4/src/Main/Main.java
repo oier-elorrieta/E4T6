@@ -1,25 +1,25 @@
 package Main;
 
-import Vista.Artista;
-import Vista.ArtistaList;
-import Vista.Erregistroa;
-import Vista.LogIn;
-import Vista.Menua;
+import Vista.ArtistaVi;
+import Vista.ArtistaListVi;
+import Vista.ErregistroaVi;
+import Vista.LogInVi;
+import Vista.MenuaVi;
 
 public class Main {
 
     public static void main(String[] args) {
        
-        LogIn frame = new LogIn();
+        LogInVi frame = new LogInVi();
         frame.setVisible(true);
         
-        Erregistroa registroFrame = new Erregistroa();
+        ErregistroaVi registroFrame = new ErregistroaVi();
         
-        Menua menuFrame = new Menua();
+        MenuaVi menuFrame = new MenuaVi();
         
-        ArtistaList artistaListFrame = new ArtistaList();
+        ArtistaListVi artistaListFrame = new ArtistaListVi();
         
-        Artista artistaFrame = new Artista(-1);
+        ArtistaVi artistaFrame = new ArtistaVi(-1);
         
      
     }
