@@ -27,17 +27,11 @@ public class DBErregistroa {
 		            PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
 
 		            preparedStatement.setString(1, nb.getIzena());
-
 		            preparedStatement.setString(2, nb.getAbizena());
-
 		            preparedStatement.setString(3, nb.getHizkuntza());
-		            
-		            preparedStatement.setString(4, nb.getErabiltzailea());
-		            
-		            preparedStatement.setString(5, nb.getPasahitza());
-		         
-		            preparedStatement.setDate(6, new java.sql.Date(nb.getJaiotzedata().getTime()));
-		           
+		            preparedStatement.setString(4, nb.getErabiltzailea());		            
+		            preparedStatement.setString(5, nb.getPasahitza());		         
+		            preparedStatement.setDate(6, new java.sql.Date(nb.getJaiotzedata().getTime()));		           
 		            preparedStatement.setDate(7, new java.sql.Date(nb.getErregistrodata().getTime()));
 		            
 		            int eragindakoErrenkadak = preparedStatement.executeUpdate();

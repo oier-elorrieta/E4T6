@@ -3,11 +3,13 @@ package Modelo;
 import java.sql.Date;
 import java.util.Objects;
 
-public class Premium {
+public class Premium extends Bezeroa{
+	
 	protected Date iraungitzedata;
 
-	public Premium(Date iraungitzedata) {
-		
+	public Premium(String izena, String abizena, String hizkuntza, String erabiltzailea, String pasahitza,
+			Date jaiotzedata, Date erregistrodata, Date iraungitzedata) {
+		super(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzedata, erregistrodata);
 		this.iraungitzedata = iraungitzedata;
 	}
 
@@ -42,4 +44,5 @@ public class Premium {
 	}
 	
 	
+
 }
