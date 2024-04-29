@@ -4,12 +4,13 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Premium extends Bezeroa{
-	
-	protected Date iraungitzedata;
 
-	public Premium(String izena, String abizena, String hizkuntza, String erabiltzailea, String pasahitza,
+	protected Date iraungitzedata;
+	
+	public Premium(int id, String izena, String abizena, String hizkuntza, String erabiltzailea, String pasahitza,
 			Date jaiotzedata, Date erregistrodata, Date iraungitzedata) {
 		super(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzedata, erregistrodata);
+		// TODO Auto-generated constructor stub
 		this.iraungitzedata = iraungitzedata;
 	}
 
@@ -23,26 +24,16 @@ public class Premium extends Bezeroa{
 
 	@Override
 	public String toString() {
-		return "Premium [iraungitzedata=" + iraungitzedata + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(iraungitzedata);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Premium other = (Premium) obj;
-		return Objects.equals(iraungitzedata, other.iraungitzedata);
+		return "Premium [iraungitzedata=" + iraungitzedata + ", izena=" + izena + ", abizena=" + abizena
+				+ ", hizkuntza=" + hizkuntza + ", erabiltzailea=" + erabiltzailea + ", pasahitza=" + pasahitza
+				+ ", jaiotzedata=" + jaiotzedata + ", erregistrodata=" + erregistrodata + ", premiummuga=" + premiummuga
+				+ ", premium=" + premium + "]";
 	}
 	
 	
-
+	
 }
+
+
+
+

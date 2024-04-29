@@ -153,7 +153,7 @@ public class ErregistroaVi extends JFrame {
                 String erregistroDataString = erregistroDataTextField.getText();
                 String hizkuntza = (String) comboBox.getSelectedItem();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date jaiotzeUtilDate = null;
                 Date erregistroUtilDate = null;
                 try {

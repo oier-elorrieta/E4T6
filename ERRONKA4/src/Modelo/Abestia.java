@@ -1,17 +1,12 @@
 package Modelo;
-
 import java.util.Objects;
 
 public class Abestia extends Audio{
-	
 	public Abestia(int id, String izena, String erreprodukzioak, double iraupena) {
 		super(id, izena, erreprodukzioak, iraupena);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected String ezaugarria;
-
-	
 
 	public String getEzaugarria() {
 		return ezaugarria;
@@ -42,6 +37,4 @@ public class Abestia extends Audio{
 		Abestia other = (Abestia) obj;
 		return Objects.equals(ezaugarria, other.ezaugarria);
 	}
-	
-	
 }
