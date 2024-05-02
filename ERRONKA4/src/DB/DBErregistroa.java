@@ -7,7 +7,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import Modelo.Bezeroa;
+
 public class DBErregistroa {
+    
+    /**
+     * Bezero berri bat datu-basean gorde.
+     * 
+     * @param nb Gorde nahi den bezeroa
+     */
     public static void BezeroaGorde(Bezeroa nb) {
         try {
             Connection connection = Konexioa.konektatu();
@@ -34,6 +41,13 @@ public class DBErregistroa {
             System.out.println("Errorea bezeroa datu-baseari eranstean: " + e.getMessage());
         }
     }
+    
+    /**
+     * Bezeroaren identifikadorea lortu datu-basean.
+     * 
+     * @param nb Bezeroa non dagoen jakiteko erabiltzen den bezero objektua
+     * @return Bezeroaren identifikadorea
+     */
     public static int idBezeroLortu(Bezeroa nb) {
         int idBezeroa = -1;
         try (Connection conn = Konexioa.konektatu();
@@ -43,20 +57,33 @@ public class DBErregistroa {
             if (rs.next()) {
                 idBezeroa = rs.getInt("IDBezeroa");
             } else {
-                throw new SQLException("Credenciales incorrectas");
+                throw new SQLException("Kredentzial okerrak");
             }
         } catch (SQLException e) {
-            System.err.println("Error de base de datos: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Errorea datu basearekin " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Errorea datu basearekin " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return idBezeroa;
     }
+    
+    /**
+     * Gaurko data lortu eta string moduan itzultzen du.
+     * 
+     * @return Gaurko data string moduan
+     */
     public static String getDataGaur() {
         LocalDate dataGaur = LocalDate.now();
         //Data Stringera aldatzen du
-        String sdataGaur = dataGaur.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
+        String sdataGaur = dataGaur.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return sdataGaur;
     }
+    
+    /**
+     * Premium erabiltzailea bihurtu eta datu-basean gorde.
+     * 
+     * @param idBezeroa Premium bihurtu nahi den bezeroaren identifikadorea
+     * @param data Premium bihurtu den data
+     */
     public static void PremiumDataGorde(int idBezeroa, String data) {
         try {
             Connection connection = Konexioa.konektatu();

@@ -9,6 +9,11 @@ import java.util.List;
 
 public class DBArtista{
 	
+	/**
+	 * Datu-basean dauden musikari guztiak itzultzen ditu.
+	 * 
+	 * @return Musikarien izen artistikoak lista moduan
+	 */
 	public static List<String> MusikaDescubritu() {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -30,6 +35,12 @@ public class DBArtista{
         return emaitza;
     }
     
+    /**
+     * Aukeratutako musikariaren album guztiak itzultzen ditu.
+     * 
+     * @param comboboxaukera Musikariaren identifikadorea
+     * @return Albumen izenburuak lista moduan
+     */
     public static List<String> MusikariarenAlbumak(int comboboxaukera) {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -51,6 +62,12 @@ public class DBArtista{
         return emaitza;
     }
     
+    /**
+     * Aukeratutako musikariaren informazioa itzultzen du.
+     * 
+     * @param comboboxaukera Musikariaren identifikadorea
+     * @return Musikariaren deskribapena
+     */
     public static List<String> MusikariarenInformazioa(int comboboxaukera) {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -72,6 +89,12 @@ public class DBArtista{
         return emaitza;
     }
 
+    /**
+     * Aukeratutako albumaren audio kopurua itzultzen du.
+     * 
+     * @param albumaukeraCbox Albumaren identifikadorea
+     * @return Audio kopurua
+     */
     public static int IDAudio(int albumaukeraCbox) {
         int rowCount = 0; 
         try {
@@ -95,6 +118,12 @@ public class DBArtista{
     }
     
     
+    /**
+     * Aukeratutako audioaren informazioa itzultzen du, minuto eta segundoetan.
+     * 
+     * @param IDAudio Audioaren identifikadorea
+     * @return Audioaren izena eta iraupena
+     */
     public static List<String> AbestiakAtera(int IDAudio) {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -108,7 +137,7 @@ public class DBArtista{
                     String izena = resultSet.getString("Izena");
                     Time iraupena = resultSet.getTime("Iraupena");
                     
-                    // Convertir la duración a minutos
+                    // Minutuetara pasa
                     long duracionSegundos = iraupena.getTime() / 1000;
                     long minutos = duracionSegundos / 60;
                     long segundos = duracionSegundos % 60;
@@ -123,7 +152,5 @@ public class DBArtista{
             System.out.println("Errorea abestiak ateratzean " + e.getMessage());
         }
         return emaitza;
-    }
-    
-    
+    }   
 }

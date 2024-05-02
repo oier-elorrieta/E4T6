@@ -9,6 +9,11 @@ public class Konexioa {
     private static final String PASS = "";
     private static Connection konexioa;
     
+    /**
+     * Datu-basearekin konexioa ezarri.
+     * 
+     * @return Konexioa eginda edo jadanik existitzen bada, konexioa itzuliko du. Bestela, null.
+     */
     public static Connection konektatu() {
         try {
             if (konexioa == null || konexioa.isClosed()) {
