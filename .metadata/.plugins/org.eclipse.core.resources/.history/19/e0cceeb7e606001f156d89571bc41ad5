@@ -1,0 +1,44 @@
+package Vista;
+
+import java.awt.EventQueue;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import DB.DBArtista;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+
+public class AlbumVi extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	
+	public AlbumVi(int CBoxArtista) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		JLabel abestiaklbl = new JLabel("Abestiak");
+		abestiaklbl.setBounds(55, 18, 46, 14);
+		contentPane.add(abestiaklbl);
+
+		JComboBox abestiakCBox = new JComboBox();
+		abestiakCBox.setBounds(37, 43, 89, 36);
+		contentPane.add(abestiakCBox);
+	
+		int iDaudio = DBArtista.IDAudio(CBoxArtista);
+	
+	List<String> albumak = AbestiakAtera();
+    for (String album : albumak) {
+        abestiakCBox.addItem(album);     
+    }   
+	}
+	}
