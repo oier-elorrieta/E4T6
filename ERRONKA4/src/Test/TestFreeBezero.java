@@ -24,7 +24,7 @@ public class TestFreeBezero {
         String pasahitza = "winterIsComing";
         Date jaiotzedata = Date.valueOf("1989-07-21");
         Date erregistrodata = Date.valueOf("2024-04-18");
-        freeBezero = new FreeBezero(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzedata, erregistrodata);
+        freeBezero = new FreeBezero(0, izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzedata, erregistrodata);
     }
 
     @Test

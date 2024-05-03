@@ -24,7 +24,7 @@ public class TestKonexioa {
     @AfterClass
     public static void tearDownAfterClassItxi() throws Exception {
         // konexioa itxi
-        Konexioa.itxiKonexioa();
+        Konexioa.itxiKonexioa(connection);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class TestKonexioa {
     @Test
     public void testKonektatuErrorea() {
         // Konexioa itxi
-        Konexioa.itxiKonexioa();
+        Konexioa.itxiKonexioa(null);
 
         // Konexioa egiten sailatu baina ezin izango da, konexioa itxita dagoelako
         Connection konexioa = Konexioa.konektatu();

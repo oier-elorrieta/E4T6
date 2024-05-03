@@ -14,8 +14,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import DB.DBMenua;
-import DB.Konexioa;
+import DB.*;
 
 public class TestDBMenua {
 
@@ -34,7 +33,7 @@ public class TestDBMenua {
     @Test
     public void testMusikaDescubritu() {
         List<String> expected = obtenerResultadoEsperado("SELECT IzenArtistikoa FROM musikaria");
-        List<String> actual = DBMenua.MusikaDescubritu();
+        List<String> actual = DBArtista.MusikaDescubritu();
 
         // Hau gpt esan dit, erantzunak ordenatzeko da. Egiten duena: goranzkako ordena hartzen dute 
         Collections.sort(expected);
@@ -47,7 +46,7 @@ public class TestDBMenua {
     public void testMusikariarenAlbumak() {
         int comboboxaukera = 1;
         List<String> expected = obtenerResultadoEsperado("SELECT Izenburua FROM album WHERE IDMusikaria = " + comboboxaukera);
-        List<String> actual = DBMenua.MusikariarenAlbumak(comboboxaukera);
+        List<String> actual = DBArtista.MusikariarenAlbumak(comboboxaukera);
 
         // Ordenar los resultados antes de comparar
         Collections.sort(expected);

@@ -7,7 +7,7 @@ public class Musikaria extends Artista {
     protected ArrayList<Musikaria> album;
     protected Ezaugarriak ezaugarriak;
     
-    protected enum Ezaugarriak {
+    public enum Ezaugarriak {
         BAKALRRIA,
         TALDEA
     }
