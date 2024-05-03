@@ -25,7 +25,7 @@ public class TestPremium {
         Date jaiotzedata = Date.valueOf("1995-03-14");
         Date erregistrodata = Date.valueOf("2024-04-18");
         Date iraungitzedata = Date.valueOf("2025-12-31");
-        premium = new Premium(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzedata, erregistrodata, iraungitzedata);
+        premium = new Premium(0, izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzedata, erregistrodata, iraungitzedata);
     }
 
     @Test
@@ -52,10 +52,10 @@ public class TestPremium {
 
     @Test
     public void testEquals() {
-        Premium samePremium = new Premium("Andoni", "Salsi", "eu", "Ando", "Sidua", Date.valueOf("1995-03-14"), Date.valueOf("2024-04-18"), Date.valueOf("2025-12-31"));
+        Premium samePremium = new Premium(0, "Andoni", "Salsi", "eu", "Ando", "Sidua", Date.valueOf("1995-03-14"), Date.valueOf("2024-04-18"), Date.valueOf("2025-12-31"));
         assertTrue(premium.equals(samePremium));
         
-        Premium differentPremium = new Premium("Aitor", "Mentxaka", "es", "Mentxi", "Erandio1234", Date.valueOf("1998-09-21"), Date.valueOf("2024-04-18"), Date.valueOf("2025-12-31"));
+        Premium differentPremium = new Premium(0, "Aitor", "Mentxaka", "es", "Mentxi", "Erandio1234", Date.valueOf("1998-09-21"), Date.valueOf("2024-04-18"), Date.valueOf("2025-12-31"));
         assertFalse(premium.equals(differentPremium));
     }
 }

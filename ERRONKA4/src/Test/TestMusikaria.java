@@ -2,13 +2,12 @@ package Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import Modelo.*;
 
 import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import Modelo.Musikaria;
 
 public class TestMusikaria {
 

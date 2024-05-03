@@ -18,5 +18,23 @@ public class Musikaria extends Artista {
         this.ezaugarriak = ezaugarriak;
     }
 
+	public ArrayList<Musikaria> getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(ArrayList<Musikaria> album) {
+		this.album = album;
+	}
+
+	public Ezaugarriak getEzaugarriak() {
+		return ezaugarriak;
+	}
+
+	public void setEzaugarriak(Ezaugarriak ezaugarriak) {
+		this.ezaugarriak = ezaugarriak;
+	}
+    
+    
+
    
 }
