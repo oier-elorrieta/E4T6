@@ -22,7 +22,7 @@ public class ArtistaListVi extends JFrame {
     private JPanel contentPane;
     private int cBoxArtistaList;
 
-    public ArtistaListVi() {
+    public ArtistaListVi(String erabiltzailea) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -56,7 +56,7 @@ public class ArtistaListVi extends JFrame {
         JButton AtzeraBotoia = new JButton("Atzera");
         AtzeraBotoia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MenuaVi menuaframe= new MenuaVi();
+                MenuaVi menuaframe= new MenuaVi(erabiltzailea);
                 menuaframe.setVisible(true);
                 setVisible(false);
             }
