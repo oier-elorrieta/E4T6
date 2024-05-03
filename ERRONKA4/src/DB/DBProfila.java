@@ -38,24 +38,36 @@ public class DBProfila {
 	    return bezeroa;
 	}
     
-    public static String bezInfTxertatu(String erabiltzailea) {
-        String erabiltzaileIzena = null;
-        try (Connection conn = Konexioa.konektatu();
-             PreparedStatement stmt = conn.prepareStatement("SELECT Erabiltzailea FROM bezeroa WHERE Erabiltzailea = " + erabiltzailea)) {
-            stmt.setString(1, erabiltzailea);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                erabiltzaileIzena = rs.getString("Erabiltzailea");
-            } else {
-                throw new SQLException("Erabiltzailea ez da aurkitu");
-            }
-        } catch (SQLException e) {
-            System.err.println("Datu-basearen errorea: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "Datu-basearen errorea: " + e.getMessage(), "Errorea", JOptionPane.ERROR_MESSAGE);
-        }
-        return erabiltzaileIzena;
-    }
     
-    
+	public static void aktualizatuBezeroa(Bezeroa bezeroa) {
+	    try (Connection conn = Konexioa.konektatu();
+	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = ?")) {
+	        
+	        stmt.setString(1, bezeroa.getIzena());
+	        stmt.setString(2, bezeroa.getAbizena());
+	        stmt.setString(3, bezeroa.getHizkuntza());
+	        stmt.setString(4, bezeroa.getPasahitza());
+	        stmt.setDate(5, bezeroa.getJaiotzedata());
+	        stmt.setDate(6, bezeroa.getErregistrodata());
+	        stmt.setString(7, bezeroa.getErabiltzailea());
 
+	        int rowsAffected = stmt.executeUpdate();
+	        if (rowsAffected == 0) {
+	            throw new SQLException("Ez da bezeroa eguneratu");
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Datu-basearen errorea: " + e.getMessage());
+	        JOptionPane.showMessageDialog(null, "Datu-basearen errorea: " + e.getMessage(), "Errorea", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+	
+	public static boolean bezKomparaketa(Bezeroa bez1, Bezeroa bez2) {
+		boolean da = false;
+		
+		if(bez1.equals(bez2)){
+			da =  true;
+		}
+		
+		return da;
+	}
 }

@@ -144,11 +144,6 @@ public class ProfilaVi extends JFrame {
         
         //Bezeroen informazioa erakusteko
         Bezeroa bezeroa = DBProfila.bezeroaLortu(Erabiltzailea);
-
-        if (bezeroa != null) { 
-        	
-        }
-          
             izenaTextField.setText(bezeroa.getIzena());
             abizenaTextField.setText(bezeroa.getAbizena());
             erabiltzaileaTextField.setText(bezeroa.getErabiltzailea());
@@ -157,7 +152,7 @@ public class ProfilaVi extends JFrame {
             erregistroDataTextField.setText(bezeroa.getErregistrodata().toString());
             premiumMugaTextField.setText(""); 
            
-        
+            
         JButton editatuGordeBtn = new JButton("Aldaketak Gorde");
         editatuGordeBtn.setBounds(123, 227, 156, 23);
         contentPane.add(editatuGordeBtn);
@@ -185,7 +180,10 @@ public class ProfilaVi extends JFrame {
                 java.sql.Date erregistroDate = new java.sql.Date(erregistroUtilDate.getTime());
 
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
-                DBErregistroa.BezeroaGorde(nb);
+
+                if(DBProfila.bezKomparaketa(bezeroa, nb) == false){ 
+                DBProfila.aktualizatuBezeroa(bezeroa);
+        }
             }
         });
 

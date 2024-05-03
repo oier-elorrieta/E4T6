@@ -32,7 +32,7 @@ public class TestMusikaria {
 
     @Test
     public void testSetAlbum() {
-        ArrayList<Musikaria> newAlbum = new ArrayList<>();
+        ArrayList<Musikaria> newAlbum = new ArrayList<>();  
         newAlbum.add(new Musikaria(2, "Queen", "queen.jpg", "Rock legends", new ArrayList<Musikaria>(), Musikaria.Ezaugarriak.TALDEA));
         musikaria.setAlbum(newAlbum);
         assertEquals(newAlbum, musikaria.getAlbum());
