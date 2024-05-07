@@ -103,6 +103,8 @@ public class ProfilaVi extends JFrame {
         erabiltzaileaTextField.setBounds(100, 33, 106, 20);
         contentPane.add(erabiltzaileaTextField);
         
+        erabiltzaileaTextField.setEditable(false);
+        
         pasahitzaTextField = new JTextField();
         pasahitzaTextField.setColumns(10);
         pasahitzaTextField.setBounds(90, 56, 116, 20);
@@ -151,6 +153,8 @@ public class ProfilaVi extends JFrame {
             jaiotzeDataTextField.setText(bezeroa.getJaiotzedata().toString()); 
             erregistroDataTextField.setText(bezeroa.getErregistrodata().toString());
             premiumMugaTextField.setText(""); 
+            
+            String lehenegoBezeroa = erabiltzaileaTextField.getText();
            
             
         JButton editatuGordeBtn = new JButton("Aldaketak Gorde");
@@ -182,7 +186,7 @@ public class ProfilaVi extends JFrame {
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
 
                 if(DBProfila.bezKomparaketa(bezeroa, nb) == false){ 
-                DBProfila.aktualizatuBezeroa(bezeroa);
+                	DBProfila.aktualizatuBezeroa(nb, lehenegoBezeroa);         
         }
             }
         });

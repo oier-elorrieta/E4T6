@@ -53,8 +53,6 @@ public class ArtistaVi extends JFrame {
         }    
         
        
-        
-        
        diskaZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
            cboxArtista = diskaZerrendaCBox.getSelectedIndex();

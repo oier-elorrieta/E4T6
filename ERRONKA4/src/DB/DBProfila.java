@@ -25,6 +25,7 @@ public class DBProfila {
 	            String pasahitza = rs.getString("Pasahitza");
 	            java.sql.Date jaiotzeData = rs.getDate("Jaiotze_data");
 	            java.sql.Date erregistroData = rs.getDate("Erregistro_data");
+	            
 
 	            bezeroa = new Bezeroa(izena, abizena, hizkuntza, user, pasahitza, jaiotzeData, erregistroData);
 	         
@@ -39,21 +40,24 @@ public class DBProfila {
 	}
     
     
-	public static void aktualizatuBezeroa(Bezeroa bezeroa) {
+	public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenegoBezeroa) {
 	    try (Connection conn = Konexioa.konektatu();
-	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = ?")) {
+	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Erabiltzailea = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = ?")) {
 	        
 	        stmt.setString(1, bezeroa.getIzena());
 	        stmt.setString(2, bezeroa.getAbizena());
 	        stmt.setString(3, bezeroa.getHizkuntza());
-	        stmt.setString(4, bezeroa.getPasahitza());
-	        stmt.setDate(5, bezeroa.getJaiotzedata());
-	        stmt.setDate(6, bezeroa.getErregistrodata());
-	        stmt.setString(7, bezeroa.getErabiltzailea());
+	        stmt.setString(4, bezeroa.getErabiltzailea());
+	        stmt.setString(5, bezeroa.getPasahitza());
+	        stmt.setDate(6, bezeroa.getJaiotzedata());
+	        stmt.setDate(7, bezeroa.getErregistrodata());
+	        stmt.setString(8, bezeroa.getErabiltzailea());
+	        
+	        
 
 	        int rowsAffected = stmt.executeUpdate();
 	        if (rowsAffected == 0) {
-	            throw new SQLException("Ez da bezeroa eguneratu");
+	            throw new SQLException("Erabiltzailaeren izena ezin da aldatu");
 	        }
 	    } catch (SQLException e) {
 	        System.err.println("Datu-basearen errorea: " + e.getMessage());

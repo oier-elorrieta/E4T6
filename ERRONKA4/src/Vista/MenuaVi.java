@@ -33,6 +33,13 @@ public class MenuaVi extends JFrame {
         });
 
         JButton PodcastBtn = new JButton("Podcastak deskubritu");
+        PodcastBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		  PodcasterrakVi podcasterrakFrame = new PodcasterrakVi(erabiltzailea);
+                  podcasterrakFrame.setVisible(true);
+          
+        	}
+        });
         PodcastBtn.setBounds(130, 107, 155, 23);
         contentPane.add(PodcastBtn);
 
