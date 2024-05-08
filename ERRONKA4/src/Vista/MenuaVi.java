@@ -34,11 +34,10 @@ public class MenuaVi extends JFrame {
 
         JButton PodcastBtn = new JButton("Podcastak deskubritu");
         PodcastBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		  PodcasterrakVi podcasterrakFrame = new PodcasterrakVi(erabiltzailea);
-                  podcasterrakFrame.setVisible(true);
-          
-        	}
+            public void actionPerformed(ActionEvent e) {
+                PodcasterrakVi podcasterrakFrame = new PodcasterrakVi(erabiltzailea);
+                podcasterrakFrame.setVisible(true);
+            }
         });
         PodcastBtn.setBounds(130, 107, 155, 23);
         contentPane.add(PodcastBtn);
@@ -46,6 +45,13 @@ public class MenuaVi extends JFrame {
         JButton NirePlaylistBtn = new JButton("Nire PLaylist-ak");
         NirePlaylistBtn.setBounds(130, 155, 155, 23);
         contentPane.add(NirePlaylistBtn);
+
+        NirePlaylistBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+              //  PlayListKudeatzaileaVi kudeatzaileaFrame = new PlayListKudeatzaileaVi(erabiltzailea);
+                //kudeatzaileaFrame.setVisible(true);
+            }
+        });
 
         JLabel AukeratuLbl = new JLabel("AUKERATU");
         AukeratuLbl.setBounds(179, 25, 59, 14);
@@ -55,14 +61,11 @@ public class MenuaVi extends JFrame {
         AtzeraBotoia.setBounds(27, 209, 89, 23);
         contentPane.add(AtzeraBotoia);
 
-        
-        
         JButton btnNewButton_1 = new JButton(erabiltzailea);
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
-            	 ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
-                 profilaFrame.setVisible(true);
+                ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
+                profilaFrame.setVisible(true);
             }
         });
         btnNewButton_1.setBounds(317, 209, 89, 23);
