@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class DBArtista{
 	
@@ -28,7 +32,7 @@ public class DBArtista{
             System.out.println("Errorea musikariak ateratzean: " + e.getMessage());
         }
         return emaitza;
-    }
+	}
     
     public static List<String> MusikariarenAlbumak(int comboboxaukera) {
         List<String> emaitza = new ArrayList<>();
@@ -72,6 +76,55 @@ public class DBArtista{
         return emaitza;
     }
 
+    public static List<byte[]> MusikariarenArgazkia(int comboboxaukera) {
+        List<byte[]> emaitza = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = Konexioa.konektatu();
+            if (connection != null) {
+                String kontsulta = "SELECT MusikIrudia FROM musikaria WHERE IDMusikaria = ?";
+                preparedStatement = connection.prepareStatement(kontsulta);
+                preparedStatement.setInt(1, comboboxaukera);
+
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    String base64Image = resultSet.getString("MusikIrudia");
+                    byte[] imageData = Base64.getDecoder().decode(base64Image);
+                    emaitza.add(imageData);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Errorea albumak ateratzean: " + e.getMessage());
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println("Errorea recursoak itxi aldera: " + e.getMessage());
+            }
+        }
+
+        return emaitza;
+    }
+    
+    public static void kargatuArgazkia(int comboboxaukera, JLabel lblArgazkia) {
+        List<byte[]> emaitza = MusikariarenArgazkia(comboboxaukera);
+        if (!emaitza.isEmpty()) {
+            byte[] imageData = emaitza.get(0); 
+            ImageIcon imageIcon = new ImageIcon(imageData);
+            lblArgazkia.setIcon(imageIcon);
+        } else {
+           
+            lblArgazkia.setIcon(null); 
+            lblArgazkia.setText("Ez da argazkirik aurkitu");
+        }
+    }
+    
+    
     public static int IDAudio(int albumaukeraCbox) {
         int rowCount = 0; 
         try {

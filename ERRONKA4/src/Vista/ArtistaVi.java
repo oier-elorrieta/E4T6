@@ -57,7 +57,7 @@ public class ArtistaVi extends JFrame {
             public void actionPerformed(ActionEvent e) {
            cboxArtista = diskaZerrendaCBox.getSelectedIndex();
            
-                AlbumVi albumViFrame= new AlbumVi(cboxArtista);
+               AlbumVi albumViFrame= new AlbumVi(cboxArtista);
                albumViFrame.setVisible(true);
                dispose();
                 
@@ -74,11 +74,18 @@ public class ArtistaVi extends JFrame {
         InformazioaTextArea.setBounds(159, 35, 265, 94);
         contentPane.add(InformazioaTextArea);
         
+        JLabel argazkiaJLbl = new JLabel("");
+        argazkiaJLbl.setBounds(159, 140, 265, 110);
+        contentPane.add(argazkiaJLbl);
+        
+        List<byte[]>artistaArgazkia = DBArtista.MusikariarenArgazkia(cboxArtistaList);
+        
+        DBArtista.kargatuArgazkia(cboxArtistaList, argazkiaJLbl);
+        
         List<String> Deskribapenak = DBArtista.MusikariarenInformazioa(cboxArtistaList);
         for (String deskribapena : Deskribapenak) {
             InformazioaTextArea.setText(deskribapena);    
-        
        }
-        
+       
     }
 }
