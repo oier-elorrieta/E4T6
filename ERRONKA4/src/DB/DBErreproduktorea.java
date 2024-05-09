@@ -28,7 +28,7 @@ public class DBErreproduktorea {
             // Emaitzak rekorritu eta audioekin konparatu
             while (resultSet.next()) {
                 AudioLista.add(resultSet.getString("Izena"));
-            }
+            } 	  		
 
             
 
