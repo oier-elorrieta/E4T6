@@ -45,7 +45,7 @@ public class ArtistaListVi extends JFrame {
             public void actionPerformed(ActionEvent e) {
                cBoxArtistaList = musikariCBox.getSelectedIndex();
            
-                ArtistaVi artistaframe= new ArtistaVi(cBoxArtistaList);
+                ArtistaVi artistaframe= new ArtistaVi(cBoxArtistaList, erabiltzailea);
                 artistaframe.setVisible(true);
                 
                 dispose();
@@ -64,14 +64,17 @@ public class ArtistaListVi extends JFrame {
         AtzeraBotoia.setBounds(23, 227, 89, 23);
         contentPane.add(AtzeraBotoia);
         
-        JButton Erabiltzailebtn = new JButton("Aurrera");
-        Erabiltzailebtn.setBounds(335, 227, 89, 23);
-        contentPane.add(Erabiltzailebtn);
-
-        Erabiltzailebtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+        JButton erabiltzailebtn = new JButton(erabiltzailea);
+        erabiltzailebtn.setBounds(335, 227, 89, 23);
+        contentPane.add(erabiltzailebtn);
+        erabiltzailebtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		       
+		    	ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
+                profilaFrame.setVisible(true);
+		    	
+		    }
+		});
         
         JLabel Izenburua = new JLabel("Aukeratu Musikaria");
         Izenburua.setFont(new Font("Tahoma", Font.PLAIN, 40));
