@@ -86,7 +86,7 @@ public class ArtistaVi extends JFrame {
         contentPane.add(atzeraBtn);
         atzeraBtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		    	 ArtistaListVi artistakframe= new ArtistaList(erabiltzailea);
+		    	 ArtistaListVi artistakframe= new ArtistaListVi(erabiltzailea);
 	                artistakframe.setVisible(true);
 	                setVisible(false);
 		    }

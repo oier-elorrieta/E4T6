@@ -6,13 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DBErreproduktorea {
 
     // Audio guztien zerrenda atera
-    public static List<String> MediaLortu() {
-        List<String> AudioLista = new ArrayList<>();
+    public static List<String> IzenaLortu() {
+        List<String> IzenLista = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -27,7 +29,7 @@ public class DBErreproduktorea {
 
             // Emaitzak rekorritu eta audioekin konparatu
             while (resultSet.next()) {
-                AudioLista.add(resultSet.getString("Izena"));
+            	IzenLista.add(resultSet.getString("Izena"));
             }
 
         } catch (SQLException e) {
@@ -42,12 +44,12 @@ public class DBErreproduktorea {
             }
         }
 
-        return AudioLista;
+        return IzenLista;
     }
 
     public static File[] AudioMediaAtera() {
         // SQL-ko izenen zerrenda lortu
-        List<String> mediaIzenak = MediaLortu();
+        List<String> mediaIzenak = IzenaLortu();
 
         // File objetuen array
         List<File> Artxiboak = new ArrayList<>();
@@ -68,4 +70,7 @@ public class DBErreproduktorea {
 
         return audioFiles;
     }
+    
+  
+    
 }
