@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 
 public class ArtistaVi extends JFrame {
 
@@ -44,6 +45,7 @@ public class ArtistaVi extends JFrame {
         contentPane.add(informazioalbl);
         
         JComboBox<String> diskaZerrendaCBox = new JComboBox<>();
+        diskaZerrendaCBox.setModel(new DefaultComboBoxModel(new String[] {""}));
         diskaZerrendaCBox.setBounds(21, 71, 128, 22);
         contentPane.add(diskaZerrendaCBox);
         
@@ -58,7 +60,7 @@ public class ArtistaVi extends JFrame {
             public void actionPerformed(ActionEvent e) {
            cboxArtista = diskaZerrendaCBox.getSelectedIndex();
            
-               AlbumVi albumViFrame= new AlbumVi(cboxArtista, erabiltzailea);
+               AlbumVi albumViFrame= new AlbumVi(cboxArtista + 1, erabiltzailea);
                albumViFrame.setVisible(true);
                dispose();
                
@@ -79,9 +81,21 @@ public class ArtistaVi extends JFrame {
         argazkiaJLbl.setBounds(159, 140, 265, 110);
         contentPane.add(argazkiaJLbl);
         
+        JButton atzeraBtn = new JButton("Atzera");
+        atzeraBtn.setBounds(10, 227, 89, 23);
+        contentPane.add(atzeraBtn);
+        atzeraBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	 ArtistaListVi artistakframe= new ArtistaList(erabiltzailea);
+	                artistakframe.setVisible(true);
+	                setVisible(false);
+		    }
+        });
+	                
         JButton erabiltzaileaBtn = new JButton(erabiltzailea);
         erabiltzaileaBtn.setBounds(322, 11, 89, 23);
         contentPane.add(erabiltzaileaBtn);
+        
         erabiltzaileaBtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		       
@@ -92,7 +106,7 @@ public class ArtistaVi extends JFrame {
 		});
         
       
-        
+        System.out.println(cboxArtistaList);
         List<String> Deskribapenak = DBArtista.MusikariarenInformazioa(cboxArtistaList);
         for (String deskribapena : Deskribapenak) {
             InformazioaTextArea.setText(deskribapena);    
@@ -100,3 +114,4 @@ public class ArtistaVi extends JFrame {
        
     }
 }
+    

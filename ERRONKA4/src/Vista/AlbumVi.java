@@ -20,7 +20,7 @@ public class AlbumVi extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	
-	public AlbumVi(int cBoxArtista, String erabiltzailea) {
+	public AlbumVi(int cboxArtista, String erabiltzailea) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -37,6 +37,15 @@ public class AlbumVi extends JFrame {
 		JComboBox<String> abestiakCBox = new JComboBox<String>();
 		abestiakCBox.setBounds(21, 77, 146, 36);
 		contentPane.add(abestiakCBox);
+		
+		System.out.println(cboxArtista + 1);
+		
+		//abestiak comboboxean sartzeko
+		List<String> abestiak = DBArtista.AbestiakAtera(cboxArtista);
+		for (String abestia : abestiak) {
+			abestiakCBox.addItem(abestia);  
+		System.out.println(abestia);
+			
 		
 		JLabel deskribapenaLbl = new JLabel("Deskribapena");
 		deskribapenaLbl.setBounds(277, 42, 79, 14);
@@ -58,12 +67,11 @@ public class AlbumVi extends JFrame {
 		    	
 		    }
 		});
-		
-		int iDaudio = DBArtista.IDAudio(cBoxArtista + 1);
 	
-		List<String> abestiak = DBArtista.AbestiakAtera(iDaudio);
-		for (String abestia : abestiak) {
-			abestiakCBox.addItem(abestia);     
+		
+		
+		
+			
     }   
 	}
 	}
