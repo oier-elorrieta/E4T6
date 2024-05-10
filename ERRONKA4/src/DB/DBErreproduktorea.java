@@ -73,7 +73,6 @@ public class DBErreproduktorea {
 
     public static void playEmon(File archivoAudio) {
         try {
-            // Verificar que el archivo de audio exista
             if (archivoAudio.exists()) {
                 Desktop.getDesktop().open(archivoAudio);
             } else {
