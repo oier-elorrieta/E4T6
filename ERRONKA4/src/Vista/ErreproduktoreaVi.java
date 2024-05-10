@@ -3,10 +3,17 @@ package Vista;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.Files;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DB.DBErreproduktorea;
+import DB.DBLogIn;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -15,6 +22,7 @@ public class ErreproduktoreaVi extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
+	
 
 	
 	/**
@@ -64,6 +72,12 @@ public class ErreproduktoreaVi extends JFrame {
                 profilaFrame.setVisible(true);
 		    	
 		    }
+		    
+		    
+		    
 		});
+		List<String> izenburuak = DBErreproduktorea.IzenaLortu();
+	    File[] abestiak =DBErreproduktorea.AudioMediaAtera();
 	}
+	
 }

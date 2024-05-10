@@ -13,8 +13,8 @@ import java.util.Map;
 public class DBErreproduktorea {
 
     // Audio guztien zerrenda atera
-    public static List<String> MediaLortu() {
-        List<String> AudioLista = new ArrayList<>();
+    public static List<String> IzenaLortu() {
+        List<String> IzenLista = new ArrayList<>();
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -29,7 +29,7 @@ public class DBErreproduktorea {
 
             // Emaitzak rekorritu eta audioekin konparatu
             while (resultSet.next()) {
-                AudioLista.add(resultSet.getString("Izena"));
+            	IzenLista.add(resultSet.getString("Izena"));
             }
 
         } catch (SQLException e) {
@@ -44,12 +44,12 @@ public class DBErreproduktorea {
             }
         }
 
-        return AudioLista;
+        return IzenLista;
     }
 
     public static File[] AudioMediaAtera() {
         // SQL-ko izenen zerrenda lortu
-        List<String> mediaIzenak = MediaLortu();
+        List<String> mediaIzenak = IzenaLortu();
 
         // File objetuen array
         List<File> Artxiboak = new ArrayList<>();
@@ -71,37 +71,6 @@ public class DBErreproduktorea {
         return audioFiles;
     }
     
-    public static Map<String, File> obtenerCancionesConArchivos() {
-        // Abesti lista lortu datubasetik
-        List<String> AbestiIzenak = MediaLortu();
-
-       // Audioen fitxategiak lortu
-        File[] AudioFitxategiak = AudioMediaAtera();
-
-        // Crear un HashMap para mapear las canciones con sus archivos de audio
-        Map<String, File> IzenEtaFitxategi = new HashMap<>();
-
-        // Verificar que el tamaño de ambas listas sea el mismo
-        if (AbestiIzenak.size() == AudioFitxategiak.length) {
-            // Asociar cada canción con su respectivo archivo de audio
-            for (int i = 0; i < AbestiIzenak.size(); i++) {
-                String AbestiIzena = AbestiIzenak.get(i);
-                File AudioFitxategi = AudioFitxategiak[i];
-
-                // Verificar si la canción ya está enlazada con otro archivo de audio
-                if (IzenEtaFitxategi.containsKey(AbestiIzena)) {
-                    System.out.println(AbestiIzena + " audio fitxategiarekin bat dago");
-                } else {
-                    // Asociar la canción con su archivo de audio
-                	IzenEtaFitxategi.put(AbestiIzena, AudioFitxategi);
-                }
-            }
-        } else {
-            System.out.println("Abesti kantitatea eta audioen fitxategia EZ da berdina");
-        }
-
-        return IzenEtaFitxategi;
-    }
-    
+  
     
 }

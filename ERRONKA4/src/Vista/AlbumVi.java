@@ -35,7 +35,7 @@ public class AlbumVi extends JFrame {
 		contentPane.add(abestiaklbl);
 
 		JComboBox<String> abestiakCBox = new JComboBox<String>();
-		abestiakCBox.setBounds(21, 77, 146, 36);
+		abestiakCBox.setBounds(10, 77, 146, 36);
 		contentPane.add(abestiakCBox);
 		
 		JLabel deskribapenaLbl = new JLabel("Deskribapena");
@@ -59,7 +59,7 @@ public class AlbumVi extends JFrame {
 		    }
 		});
 		
-		int iDaudio = DBArtista.IDAudio(cBoxArtista + 1);
+		int iDaudio = DBArtista.IDAudio(cBoxArtista);
 	
 		List<String> abestiak = DBArtista.AbestiakAtera(iDaudio);
 		for (String abestia : abestiak) {
