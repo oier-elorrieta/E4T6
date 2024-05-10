@@ -21,16 +21,14 @@ public class DBErreproduktorea {
             Connection conn = Konexioa.konektatu();
 
             // SQL-ren audio lista atera gero konparatu ahal izateko
-            String query = "SELECT Izena  FROM Audioa";
+            String query = "SELECT Izena FROM Audioa";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
 
             // Emaitzak rekorritu eta audioekin konparatu
             while (resultSet.next()) {
                 AudioLista.add(resultSet.getString("Izena"));
-            } 	  		
-
-            
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,5 +43,29 @@ public class DBErreproduktorea {
         }
 
         return AudioLista;
+    }
+
+    public static File[] AudioMediaAtera() {
+        // SQL-ko izenen zerrenda lortu
+        List<String> mediaIzenak = MediaLortu();
+
+        // File objetuen array
+        List<File> Artxiboak = new ArrayList<>();
+
+        // Beste karpeta batean daudenez eta izena ez denez berdina, bidea sortu behar da eskuz
+        for (String mediaIzena : mediaIzenak) {
+            String path = "media/" + mediaIzena + ".wav";
+            File file = new File(path);
+            if (file.exists()) {
+                Artxiboak.add(file);
+            } else {
+                System.err.println("El archivo no existe: " + path);
+            }
+        }
+
+        // File-en lista array bihurtu
+        File[] audioFiles = Artxiboak.toArray(new File[0]);
+
+        return audioFiles;
     }
 }

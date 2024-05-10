@@ -78,9 +78,7 @@ public class ArtistaVi extends JFrame {
         argazkiaJLbl.setBounds(159, 140, 265, 110);
         contentPane.add(argazkiaJLbl);
         
-        List<byte[]>artistaArgazkia = DBArtista.MusikariarenArgazkia(cboxArtistaList);
-        
-        DBArtista.kargatuArgazkia(cboxArtistaList, argazkiaJLbl);
+      
         
         List<String> Deskribapenak = DBArtista.MusikariarenInformazioa(cboxArtistaList);
         for (String deskribapena : Deskribapenak) {
