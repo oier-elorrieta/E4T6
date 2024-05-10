@@ -1,6 +1,8 @@
 package Vista;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,7 +23,7 @@ public class ErreproduktoreaVi extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ErreproduktoreaVi frame = new ErreproduktoreaVi();
+					ErreproduktoreaVi frame = new ErreproduktoreaVi("NombreUsuario");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +35,7 @@ public class ErreproduktoreaVi extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ErreproduktoreaVi() {
+	public ErreproduktoreaVi(String erabiltzailea) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -66,5 +68,17 @@ public class ErreproduktoreaVi extends JFrame {
 		textField.setBounds(13, 202, 411, 48);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		
+		JButton profilaBtn = new JButton(erabiltzailea);
+		profilaBtn.setBounds(345, 11, 89, 23);
+		contentPane.add(profilaBtn);
+		profilaBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		       
+		    	ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
+                profilaFrame.setVisible(true);
+		    	
+		    }
+		});
 	}
 }
