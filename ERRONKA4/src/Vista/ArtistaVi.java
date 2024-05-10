@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 public class ArtistaVi extends JFrame {
 
@@ -24,7 +25,7 @@ public class ArtistaVi extends JFrame {
     private int cboxArtista;
 
     
-    public ArtistaVi(int cboxArtistaList) {
+    public ArtistaVi(int cboxArtistaList, String erabiltzailea) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -34,16 +35,16 @@ public class ArtistaVi extends JFrame {
         contentPane.setLayout(null);
         
         JLabel DiskaZerLbl = new JLabel("Diska Zerrenda");
-        DiskaZerLbl.setBounds(38, 11, 90, 14);
+        DiskaZerLbl.setBounds(44, 40, 90, 14);
         contentPane.add(DiskaZerLbl);
         
         
         JLabel informazioalbl = new JLabel("Informazioa");
-        informazioalbl.setBounds(261, 11, 68, 14);
+        informazioalbl.setBounds(263, 40, 68, 14);
         contentPane.add(informazioalbl);
         
         JComboBox<String> diskaZerrendaCBox = new JComboBox<>();
-        diskaZerrendaCBox.setBounds(10, 36, 128, 22);
+        diskaZerrendaCBox.setBounds(21, 71, 128, 22);
         contentPane.add(diskaZerrendaCBox);
         
         
@@ -57,10 +58,10 @@ public class ArtistaVi extends JFrame {
             public void actionPerformed(ActionEvent e) {
            cboxArtista = diskaZerrendaCBox.getSelectedIndex();
            
-               AlbumVi albumViFrame= new AlbumVi(cboxArtista);
+               AlbumVi albumViFrame= new AlbumVi(cboxArtista, erabiltzailea);
                albumViFrame.setVisible(true);
                dispose();
-                
+               
                
             }
         }); 
@@ -71,12 +72,24 @@ public class ArtistaVi extends JFrame {
         InformazioaTextArea.setLineWrap(true);
         InformazioaTextArea.setWrapStyleWord(true);
         InformazioaTextArea.setEditable(false);
-        InformazioaTextArea.setBounds(159, 35, 265, 94);
+        InformazioaTextArea.setBounds(159, 60, 265, 94);
         contentPane.add(InformazioaTextArea);
         
         JLabel argazkiaJLbl = new JLabel("");
         argazkiaJLbl.setBounds(159, 140, 265, 110);
         contentPane.add(argazkiaJLbl);
+        
+        JButton erabiltzaileaBtn = new JButton(erabiltzailea);
+        erabiltzaileaBtn.setBounds(322, 11, 89, 23);
+        contentPane.add(erabiltzaileaBtn);
+        erabiltzaileaBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		       
+		    	ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
+                profilaFrame.setVisible(true);
+		    	
+		    }
+		});
         
       
         
