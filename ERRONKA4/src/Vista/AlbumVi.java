@@ -19,6 +19,7 @@ public class AlbumVi extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
+	private int cboxAbestia;
 	
 	public AlbumVi(int cboxArtista, String erabiltzailea) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,8 +45,16 @@ public class AlbumVi extends JFrame {
 		List<String> abestiak = DBArtista.AbestiakAtera(cboxArtista);
 		for (String abestia : abestiak) {
 			abestiakCBox.addItem(abestia);  
-		System.out.println(abestia);
-			
+		
+			abestiakCBox.addActionListener(new ActionListener() {
+		            public void actionPerformed(ActionEvent e) {
+			 cboxAbestia = abestiakCBox.getSelectedIndex();
+	           
+             ErreproduktoreaVi ErreprodukzioaFrame= new ErreproduktoreaVi(erabiltzailea, cboxArtista);
+             ErreprodukzioaFrame.setVisible(true);
+             dispose();
+		            }
+	        }); 
 		
 		JLabel deskribapenaLbl = new JLabel("Deskribapena");
 		deskribapenaLbl.setBounds(277, 42, 79, 14);

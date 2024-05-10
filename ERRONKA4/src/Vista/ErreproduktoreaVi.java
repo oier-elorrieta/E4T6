@@ -20,7 +20,7 @@ public class ErreproduktoreaVi extends JFrame {
     /**
      * Create the frame.
      */
-    public ErreproduktoreaVi(String erabiltzailea, File Aukera) {
+    public ErreproduktoreaVi(String erabiltzailea, int cboxAbestia) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -41,11 +41,7 @@ public class ErreproduktoreaVi extends JFrame {
         playBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                if (Aukera != null && Aukera.exists()) {
-                    DBErreproduktorea.playEmon(Aukera);
-                } else {
-                    System.err.println("Ez da abestirik aukeratu");
-                }
+            	DBErreproduktorea.audioEntzun(cboxAbestia);
             }
         });
         playBtn.setBounds(170, 168, 89, 23);
