@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 
 public class DBArtista{
 	
-	public static List<String> MusikaDescubritu() {
+	public static List<String> MusikariakDescubritu() {
         List<String> emaitza = new ArrayList<>();
         try {
             Connection connection = Konexioa.konektatu();
@@ -78,9 +78,6 @@ public class DBArtista{
 
   
     
-   
-    
-    
     public static int IDAudio(int albumaukeraCbox) {
         int rowCount = 0; 
         try {
@@ -103,26 +100,37 @@ public class DBArtista{
         return rowCount;
     }
     
-    
-    public static List<String> AbestiakAtera(int IDAudio) {
+    public static List<String> AbestiakAtera(int IDAlbum) {
         List<String> emaitza = new ArrayList<>();
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "SELECT Izena, Iraupena FROM audioa WHERE IDAudio = ?";
+                String kontsulta = "SELECT Izena, Iraupena FROM audioa JOIN abestia USING (IDAudio) JOIN album USING (IDAlbum) WHERE IDAlbum = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
-                preparedStatement.setInt(1, IDAudio);
+                preparedStatement.setInt(1, IDAlbum);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     String izena = resultSet.getString("Izena");
-                    Time iraupena = resultSet.getTime("Iraupena");
-                    
-                    // Convertir la duración a minutos
-                    long duracionSegundos = iraupena.getTime() / 1000;
-                    long minutos = duracionSegundos / 60;
-                    long segundos = duracionSegundos % 60;
-                    
-                    emaitza.add(izena + ", " + minutos + " minutu " + segundos + " segundo");
+                    String iraupenaStr = resultSet.getString("Iraupena");
+
+                    // Dividimos el tiempo en partes: horas, minutos y segundos
+                    String[] partes = iraupenaStr.split(":");
+                    int horas = Integer.parseInt(partes[0]);
+                    int minutos = Integer.parseInt(partes[1]);
+                    int segundos = Integer.parseInt(partes[2]);
+
+                    // Convertimos todo a segundos
+                    int iraupenaSegundos = horas * 3600 + minutos * 60 + segundos;
+
+                    // Calculamos los minutos y segundos
+                    minutos = iraupenaSegundos / 60;
+                    segundos = iraupenaSegundos % 60;
+
+                    // Formateamos el tiempo en minutos:segundos
+                    String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
+
+                    // Agregamos el nombre de la canción y el tiempo formateado a la lista de resultados
+                    emaitza.add(izena + " - " + tiempoFormateado);
                 }
                 resultSet.close();
                 preparedStatement.close();
@@ -133,6 +141,7 @@ public class DBArtista{
         }
         return emaitza;
     }
+    
     
     
 }

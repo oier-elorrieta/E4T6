@@ -36,7 +36,7 @@ public class ArtistaListVi extends JFrame {
         musikariCBox.setBounds(51, 79, 346, 44);
         contentPane.add(musikariCBox);
         
-        List<String> musikariak = DBArtista.MusikaDescubritu();
+        List<String> musikariak = DBArtista.MusikariakDescubritu();
         for (String artista : musikariak) {
             musikariCBox.addItem(artista); 
         }
