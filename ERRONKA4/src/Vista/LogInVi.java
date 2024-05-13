@@ -63,13 +63,13 @@ public class LogInVi extends JFrame {
         JButton LogInBotoia = new JButton("LogIn");
         LogInBotoia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String erabiltzailea = textFieldErabiltzailea.getText();
-                String pasahitza = textFieldPasahitza.getText();
+                String Erabiltzailea = textFieldErabiltzailea.getText();
+                String Pasahitza = textFieldPasahitza.getText();
                 
-                boolean isloginok = DBLogIn.isLoginOk(erabiltzailea, pasahitza);
+                boolean isloginok = DBLogIn.isLoginOk(Erabiltzailea, Pasahitza);
         
                 if(isloginok) {
-                    MenuaVi menua = new MenuaVi(erabiltzailea);
+                    MenuaVi menua = new MenuaVi();
                     menua.setVisible(true);
                 }
             }

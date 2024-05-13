@@ -13,7 +13,7 @@ public class MenuaVi extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    public MenuaVi(String erabiltzailea) {
+    public MenuaVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -26,32 +26,19 @@ public class MenuaVi extends JFrame {
         contentPane.add(MusikaDeskubrituBtn);
         MusikaDeskubrituBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ArtistaListVi ArtistaListFrame = new ArtistaListVi(erabiltzailea);
+                ArtistaListVi ArtistaListFrame = new ArtistaListVi();
                 ArtistaListFrame.setVisible(true);
                 setVisible(false);
             }
         });
 
         JButton PodcastBtn = new JButton("Podcastak deskubritu");
-        PodcastBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                PodcasterrakVi podcasterrakFrame = new PodcasterrakVi(erabiltzailea);
-                podcasterrakFrame.setVisible(true);
-            }
-        });
         PodcastBtn.setBounds(130, 107, 155, 23);
         contentPane.add(PodcastBtn);
 
         JButton NirePlaylistBtn = new JButton("Nire PLaylist-ak");
         NirePlaylistBtn.setBounds(130, 155, 155, 23);
         contentPane.add(NirePlaylistBtn);
-
-        NirePlaylistBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-              //  PlayListKudeatzaileaVi kudeatzaileaFrame = new PlayListKudeatzaileaVi(erabiltzailea);
-                //kudeatzaileaFrame.setVisible(true);
-            }
-        });
 
         JLabel AukeratuLbl = new JLabel("AUKERATU");
         AukeratuLbl.setBounds(179, 25, 59, 14);
@@ -61,11 +48,9 @@ public class MenuaVi extends JFrame {
         AtzeraBotoia.setBounds(27, 209, 89, 23);
         contentPane.add(AtzeraBotoia);
 
-        JButton btnNewButton_1 = new JButton(erabiltzailea);
+        JButton btnNewButton_1 = new JButton("New button");
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
-                profilaFrame.setVisible(true);
             }
         });
         btnNewButton_1.setBounds(317, 209, 89, 23);

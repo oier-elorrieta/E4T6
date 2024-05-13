@@ -19,15 +19,4 @@ public class Konexioa {
         }
         return konexioa;
     }
-    
-        public static void itxiKonexioa(Connection konexioa) {
-            try {
-                if (konexioa != null && !konexioa.isClosed()) {
-                    konexioa.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    
 }
