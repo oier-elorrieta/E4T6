@@ -34,12 +34,12 @@ public class DBArtista{
         return emaitza;
 	}
     
-    public static List<String> MusikariarenAlbumak(int comboboxaukera) {
+    public static List<String> MusikariarenAlbumak(int cboxArtista) {
         List<String> emaitza = new ArrayList<>();
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "SELECT Izenburua, Eguna FROM album where IDMusikaria = " + comboboxaukera ;
+                String kontsulta = "SELECT Izenburua, Eguna FROM album where IDMusikaria = " + cboxArtista ;
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -55,12 +55,12 @@ public class DBArtista{
         return emaitza;
     }
     
-    public static List<String> MusikariarenInformazioa(int comboboxaukera) {
+    public static List<String> MusikariarenInformazioa(int cboxArtista) {
         List<String> emaitza = new ArrayList<>();
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "SELECT Deskribapena FROM musikaria where IDMusikaria = " + comboboxaukera ;
+                String kontsulta = "SELECT Deskribapena FROM musikaria where IDMusikaria = " + cboxArtista;
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
@@ -138,6 +138,29 @@ public class DBArtista{
             }
         } catch (SQLException e) {
             System.out.println("Errorea abestiak ateratzean " + e.getMessage());
+        }
+        return emaitza;
+    }
+
+
+    
+    public static List<String> albumarenInformazioa(int idAlbum) {
+        List<String> emaitza = new ArrayList<>();
+        try {
+            Connection connection = Konexioa.konektatu();
+            if (connection != null) {
+                String kontsulta = "SELECT Eguna, Generoa FROM musikaria where IDMusikaria = " + idAlbum ;
+                PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    emaitza.add(resultSet.getString("Deskribapena"));
+                }
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Errorea musikariak ateratzean " + e.getMessage());
         }
         return emaitza;
     }

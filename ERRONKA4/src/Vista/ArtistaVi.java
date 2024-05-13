@@ -23,7 +23,7 @@ public class ArtistaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private int cboxArtista;
+    private int cboxDiska;
 
     
     public ArtistaVi(int cboxArtistaList, String erabiltzailea) {
@@ -45,7 +45,6 @@ public class ArtistaVi extends JFrame {
         contentPane.add(informazioalbl);
         
         JComboBox<String> diskaZerrendaCBox = new JComboBox<>();
-        diskaZerrendaCBox.setModel(new DefaultComboBoxModel(new String[] {""}));
         diskaZerrendaCBox.setBounds(21, 71, 128, 22);
         contentPane.add(diskaZerrendaCBox);
         
@@ -58,9 +57,9 @@ public class ArtistaVi extends JFrame {
        
        diskaZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-           cboxArtista = diskaZerrendaCBox.getSelectedIndex();
+           cboxDiska = diskaZerrendaCBox.getSelectedIndex();
            
-               AlbumVi albumViFrame= new AlbumVi(cboxArtista + 1, erabiltzailea);
+               AlbumVi albumViFrame= new AlbumVi(cboxDiska, erabiltzailea);
                albumViFrame.setVisible(true);
                dispose();
                
