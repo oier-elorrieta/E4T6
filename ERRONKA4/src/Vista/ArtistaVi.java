@@ -23,7 +23,7 @@ public class ArtistaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private int cboxDiska;
+    private String cboxDiska;
 
     
     public ArtistaVi(int cboxArtistaList, String erabiltzailea) {
@@ -57,7 +57,7 @@ public class ArtistaVi extends JFrame {
        
        diskaZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-           cboxDiska = diskaZerrendaCBox.getSelectedIndex();
+           cboxDiska = diskaZerrendaCBox.getSelectedItem().toString();
            
                AlbumVi albumViFrame= new AlbumVi(cboxDiska, erabiltzailea);
                albumViFrame.setVisible(true);

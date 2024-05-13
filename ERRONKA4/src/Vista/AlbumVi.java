@@ -20,8 +20,9 @@ public class AlbumVi extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private int cboxAbestia;
+	private JTextField textField_1;
 	
-	public AlbumVi(int cboxDiska, String erabiltzailea) {
+	public AlbumVi(String cboxDiska, String erabiltzailea) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -39,15 +40,24 @@ public class AlbumVi extends JFrame {
 		abestiakCBox.setBounds(10, 77, 146, 36);
 		contentPane.add(abestiakCBox);
 		
+		textField_1 = new JTextField();
+
+		textField_1 .setBounds(159, 60, 265, 94);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
 		
+		String Deskribapena = DBArtista.albumarenInformazioa(cboxDiska);
+		
+		textField_1.setText(Deskribapena);
+		
+		System.out.println(cboxDiska);
 		//abestiak comboboxean sartzeko
-		List<String> abestiak = DBArtista.AbestiakAtera(cboxDiska + 1);
+		List<String> abestiak = DBArtista.AbestiakAtera(cboxDiska);
 		for (String abestia : abestiak) {
 			abestiakCBox.addItem(abestia); 
 			
 			
 			
-		
 			abestiakCBox.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent e) {
 			 cboxAbestia = abestiakCBox.getSelectedIndex();
@@ -55,19 +65,12 @@ public class AlbumVi extends JFrame {
              ErreproduktoreaVi ErreprodukzioaFrame= new ErreproduktoreaVi(erabiltzailea, cboxAbestia);
              ErreprodukzioaFrame.setVisible(true);
              dispose();
-		            }
+		     }
 	        }); 
 		
 		JLabel deskribapenaLbl = new JLabel("Deskribapena");
 		deskribapenaLbl.setBounds(277, 42, 79, 14);
 		contentPane.add(deskribapenaLbl);
-		
-		textField = new JTextField();
-		textField.setBounds(219, 77, 188, 36);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		
 		
 		JButton erabiltzaileaBtn = new JButton(erabiltzailea);
 		erabiltzaileaBtn.setBounds(321, 11, 89, 23);
