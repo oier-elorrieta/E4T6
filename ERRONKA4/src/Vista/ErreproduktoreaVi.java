@@ -17,8 +17,6 @@ public class ErreproduktoreaVi extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
     private File Aukera; 
-    private boolean entzuten = false; // Variable para rastrear si la canción está reproduciendo o en pausa
-
     /**
      * Create the frame.
      */
@@ -42,14 +40,8 @@ public class ErreproduktoreaVi extends JFrame {
         JButton playBtn = new JButton("Play");
         playBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (entzuten) {
-                    DBErreproduktorea.audioPausa();
-                    playBtn.setText("Play");
-                } else {
-                    DBErreproduktorea.audioEntzun(cboxAbestia);
-                    playBtn.setText("Pausa");
-                }
-                entzuten = !entzuten; // Alrebes ipini
+                
+            	DBErreproduktorea.audioEntzun(cboxAbestia);
             }
         });
         playBtn.setBounds(170, 168, 89, 23);
