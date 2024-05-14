@@ -7,7 +7,7 @@ public class Musikaria extends Artista {
     protected ArrayList<Musikaria> album;
     protected Ezaugarriak ezaugarriak;
     
-    protected enum Ezaugarriak {
+    public enum Ezaugarriak {
         BAKALRRIA,
         TALDEA
     }
@@ -17,6 +17,24 @@ public class Musikaria extends Artista {
         this.album = album;
         this.ezaugarriak = ezaugarriak;
     }
+
+	public ArrayList<Musikaria> getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(ArrayList<Musikaria> album) {
+		this.album = album;
+	}
+
+	public Ezaugarriak getEzaugarriak() {
+		return ezaugarriak;
+	}
+
+	public void setEzaugarriak(Ezaugarriak ezaugarriak) {
+		this.ezaugarriak = ezaugarriak;
+	}
+    
+    
 
    
 }

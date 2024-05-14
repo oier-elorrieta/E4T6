@@ -39,24 +39,3 @@ public class DBErreproduktorea {
         }
     }
     }
-
-
-/*
-public static void audioEntzun(int id) {
-    // getProperty erabiltzen da jakin ahal izateko orain erabiltzen hari garen direktorioa
-    String directorioActual = System.getProperty("user.dir");
-
-    // Erabiltzen hari garen direktorioaren bidea, Media karpeta eta bilatu nahi dugun media artxiboa konbinatzen ditugu
-    String audioIzena = directorioActual + File.separator + "Media" + File.separator + id + ".wav";
-
-    // Crear el objeto File con la ruta completa del archivo de audio
-    File archivo = new File(audioIzena);
-    
-    if (archivo.exists()) {
-        playEmon(archivo);
-    } else {
-        System.out.println("El archivo de audio '" + audioIzena + "' no se encontró.");
-    }
-}
-
-*/

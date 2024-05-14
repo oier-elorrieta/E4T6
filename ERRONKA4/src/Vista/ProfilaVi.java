@@ -8,8 +8,6 @@ import javax.swing.border.EmptyBorder;
 import DB.DBErregistroa;
 import DB.DBProfila;
 import Modelo.Bezeroa;
-import Salbuespenak.ErregistroSalbuespena;
-import Salbuespenak.ProfilaSalbuespena;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -188,12 +186,7 @@ public class ProfilaVi extends JFrame {
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
 
                 if(DBProfila.bezKomparaketa(bezeroa, nb) == false){ 
-                	try {
-						DBProfila.aktualizatuBezeroa(nb, lehenegoBezeroa);
-					} catch (ProfilaSalbuespena e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}         
+                	DBProfila.aktualizatuBezeroa(nb, lehenegoBezeroa);         
         }
             }
         });
@@ -225,12 +218,7 @@ public class ProfilaVi extends JFrame {
                 java.sql.Date erregistroDate = new java.sql.Date(erregistroUtilDate.getTime());
 
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
-                try {
-					DBErregistroa.BezeroaGorde(nb);
-				} catch (ErregistroSalbuespena e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+                DBErregistroa.BezeroaGorde(nb);
 
                 try {
                     erregistroUtilDate = sdf.parse(erregistroDataTextField.getText());
