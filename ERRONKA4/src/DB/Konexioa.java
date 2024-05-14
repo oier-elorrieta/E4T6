@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Konexioa {
-    private static final String URL = "jdbc:mysql://127.0.0.1:33067/db_spoty";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3307/db_spoty";
     private static final String USER = "root";
     private static final String PASS = "";
     private static Connection konexioa;
