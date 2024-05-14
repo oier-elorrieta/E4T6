@@ -1,6 +1,6 @@
 package Vista;
 
-
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,18 +11,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 
-import DB.DBArtista;
-
+import DB.DBMenua;
 
 public class ArtistaListVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private int cBoxArtistaList;
+    private int comboboxaukera;
 
-    public ArtistaListVi(String erabiltzailea) {
+    public ArtistaListVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -36,19 +34,18 @@ public class ArtistaListVi extends JFrame {
         musikariCBox.setBounds(51, 79, 346, 44);
         contentPane.add(musikariCBox);
         
-        List<String> musikariak = DBArtista.MusikariakDescubritu();
+        List<String> musikariak = DBMenua.MusikaDescubritu();
         for (String artista : musikariak) {
             musikariCBox.addItem(artista); 
         }
         
         musikariCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               cBoxArtistaList = musikariCBox.getSelectedIndex();
+               comboboxaukera = musikariCBox.getSelectedIndex();
            
-                ArtistaVi artistaframe= new ArtistaVi(cBoxArtistaList, erabiltzailea);
+                ArtistaVi artistaframe= new ArtistaVi(comboboxaukera);
                 artistaframe.setVisible(true);
-                
-                dispose();
+                setVisible(false);
                 
             }
         }); 
@@ -56,7 +53,7 @@ public class ArtistaListVi extends JFrame {
         JButton AtzeraBotoia = new JButton("Atzera");
         AtzeraBotoia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MenuaVi menuaframe= new MenuaVi(erabiltzailea);
+                MenuaVi menuaframe= new MenuaVi();
                 menuaframe.setVisible(true);
                 setVisible(false);
             }
@@ -64,17 +61,17 @@ public class ArtistaListVi extends JFrame {
         AtzeraBotoia.setBounds(23, 227, 89, 23);
         contentPane.add(AtzeraBotoia);
         
-        JButton erabiltzailebtn = new JButton(erabiltzailea);
-        erabiltzailebtn.setBounds(335, 227, 89, 23);
-        contentPane.add(erabiltzailebtn);
-        erabiltzailebtn.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		       
-		    	ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
-                profilaFrame.setVisible(true);
-		    	
-		    }
-		});
+        JButton AurreraBotoia = new JButton("Aurrera");
+        AurreraBotoia.setBounds(335, 227, 89, 23);
+        contentPane.add(AurreraBotoia);
+
+        AurreraBotoia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ArtistaVi artistaframe = new ArtistaVi(0);
+                artistaframe.setVisible(true);
+                setVisible(false);
+            }
+        });
         
         JLabel Izenburua = new JLabel("Aukeratu Musikaria");
         Izenburua.setFont(new Font("Tahoma", Font.PLAIN, 40));

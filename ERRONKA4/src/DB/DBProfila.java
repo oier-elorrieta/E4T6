@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import Modelo.Bezeroa;
+import Salbuespenak.LogInSalbuespena;
+import Salbuespenak.ProfilaSalbuespena;
 
 public class DBProfila {
 	public static Bezeroa bezeroaLortu(String erabiltzailea) {
@@ -40,7 +42,7 @@ public class DBProfila {
 	}
     
     
-	public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenegoBezeroa) {
+	public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenegoBezeroa) throws ProfilaSalbuespena{
 	    try (Connection conn = Konexioa.konektatu();
 	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Erabiltzailea = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = ?")) {
 	        
@@ -60,8 +62,7 @@ public class DBProfila {
 	            throw new SQLException("Erabiltzailaeren izena ezin da aldatu");
 	        }
 	    } catch (SQLException e) {
-	        System.err.println("Datu-basearen errorea: " + e.getMessage());
-	        JOptionPane.showMessageDialog(null, "Datu-basearen errorea: " + e.getMessage(), "Errorea", JOptionPane.ERROR_MESSAGE);
+	    	 throw new ProfilaSalbuespena(); 
 	    }
 	}
 	

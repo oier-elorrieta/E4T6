@@ -11,14 +11,4 @@ public class Podcaster extends Artista {
         super(id, izena, irudia, deskribapena);
         this.podkasterrak = podkasterrak;
     }
-
-	public ArrayList<Podcaster> getPodkasterrak() {
-		return podkasterrak;
-	}
-
-	public void setPodkasterrak(ArrayList<Podcaster> podkasterrak) {
-		this.podkasterrak = podkasterrak;
-	}
-    
-    
 }

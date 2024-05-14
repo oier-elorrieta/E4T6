@@ -100,14 +100,14 @@ public class DBArtista{
         return rowCount;
     }
     
-    public static List<String> AbestiakAtera(int IDAlbum) {
-        List<String> emaitza = new ArrayList<>();
+    public static ArrayList<String> AbestiakAtera(String Album) {
+        ArrayList<String> emaitza = new ArrayList<String>();
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "SELECT Izena, Iraupena FROM audioa JOIN abestia USING (IDAudio) JOIN album USING (IDAlbum) WHERE IDAlbum = ?";
+                String kontsulta = "SELECT Izena, Iraupena FROM abestiDiskak where Izenburua = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
-                preparedStatement.setInt(1, IDAlbum);
+                preparedStatement.setString(1, Album);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     String izena = resultSet.getString("Izena");
@@ -143,17 +143,20 @@ public class DBArtista{
     }
 
 
-    
-    public static List<String> albumarenInformazioa(int idAlbum) {
-        List<String> emaitza = new ArrayList<>();
+    public static String albumarenInformazioa(String Albuma) {
+        StringBuilder emaitza = new StringBuilder();
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "SELECT Eguna, Generoa FROM musikaria where IDMusikaria = " + idAlbum ;
+                String kontsulta = "SELECT Eguna, Generoa, Audioa, Iraupena FROM albumDeskribapena where Izenburua = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
+                preparedStatement.setString(1, Albuma);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    emaitza.add(resultSet.getString("Deskribapena"));
+                    emaitza.append("Eguna: ").append(resultSet.getDate("Eguna")).append(", ");
+                    emaitza.append("Generoa: ").append(resultSet.getString("Generoa")).append(", ");
+                    emaitza.append("Audioa: ").append(resultSet.getInt("Audioa")).append(", ");
+                    emaitza.append("Iraupena: ").append(resultSet.getTime("Iraupena")).append("\n");
                 }
                 resultSet.close();
                 preparedStatement.close();
@@ -162,8 +165,10 @@ public class DBArtista{
         } catch (SQLException e) {
             System.out.println("Errorea musikariak ateratzean " + e.getMessage());
         }
-        return emaitza;
+        return emaitza.toString();
     }
+    
+    
     
     
     
