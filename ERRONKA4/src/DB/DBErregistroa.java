@@ -12,7 +12,7 @@ public class DBErregistroa {
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String kontsulta = "UPDATE INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
                 preparedStatement.setString(1, nb.getIzena());
                 preparedStatement.setString(2, nb.getAbizena());

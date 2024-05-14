@@ -11,6 +11,7 @@ import Modelo.Bezeroa;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -162,6 +163,9 @@ public class ProfilaVi extends JFrame {
         contentPane.add(editatuGordeBtn);
         editatuGordeBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
+            	
+            	
                 String izena = izenaTextField.getText();
                 String abizena = abizenaTextField.getText();
                 String erabiltzailea = erabiltzaileaTextField.getText();

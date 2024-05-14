@@ -40,24 +40,28 @@ public class DBProfila {
 	}
     
     
-	public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenegoBezeroa) {
+	public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenengoBezeroa) {
+	    // Egiaztatu eremua beteta dagoela
+	    if (bezeroa.getIzena().isEmpty() || bezeroa.getAbizena().isEmpty() || bezeroa.getErabiltzailea().isEmpty() ||
+	        bezeroa.getPasahitza().isEmpty() || bezeroa.getJaiotzedata() == null || bezeroa.getErregistrodata() == null) {
+	        JOptionPane.showMessageDialog(null, "Mesedez, bete eremua beti bete.", "Eremuak bete behar dira", JOptionPane.WARNING_MESSAGE);
+	        return;
+	    }
+	    
 	    try (Connection conn = Konexioa.konektatu();
-	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Erabiltzailea = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = ?")) {
+	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = " + lehenengoBezeroa)) {
 	        
 	        stmt.setString(1, bezeroa.getIzena());
 	        stmt.setString(2, bezeroa.getAbizena());
-	        stmt.setString(3, bezeroa.getHizkuntza());
-	        stmt.setString(4, bezeroa.getErabiltzailea());
-	        stmt.setString(5, bezeroa.getPasahitza());
-	        stmt.setDate(6, bezeroa.getJaiotzedata());
-	        stmt.setDate(7, bezeroa.getErregistrodata());
-	        stmt.setString(8, bezeroa.getErabiltzailea());
-	        
-	        
+	        stmt.setString(3, bezeroa.getHizkuntza());       
+	        stmt.setString(4, bezeroa.getPasahitza());
+	        stmt.setDate(5, bezeroa.getJaiotzedata());
+	        stmt.setDate(6, bezeroa.getErregistrodata());
+	        stmt.setString(7, bezeroa.getErabiltzailea());
 
-	        int rowsAffected = stmt.executeUpdate();
-	        if (rowsAffected == 0) {
-	            throw new SQLException("Erabiltzailaeren izena ezin da aldatu");
+	        int erregistroakAldatutakoak = stmt.executeUpdate();
+	        if (erregistroakAldatutakoak == 0) {
+	            throw new SQLException("Erabiltzaile izena ezin da aldatu");
 	        }
 	    } catch (SQLException e) {
 	        System.err.println("Datu-basearen errorea: " + e.getMessage());

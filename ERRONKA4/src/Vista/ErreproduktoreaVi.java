@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 import DB.DBErreproduktorea;
 
 public class ErreproduktoreaVi extends JFrame {
@@ -16,11 +17,12 @@ public class ErreproduktoreaVi extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
-    private File Aukera; 
-    /**
-     * Create the frame.
-     */
-    public ErreproduktoreaVi(String erabiltzailea, int cboxAbestia) {
+    private int artistId;
+    private int currentSongIndex;
+    private int maxSongIndex;
+    private boolean erreproduzitzen = false;
+
+    public ErreproduktoreaVi(String erabiltzailea, int cboxAbestia, int cBoxArtistaList) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -28,6 +30,10 @@ public class ErreproduktoreaVi extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        artistId = cBoxArtistaList;
+        currentSongIndex = 0; // Lehehengo abestian hasteko
+        maxSongIndex = 3; // Abeslari bakotzairen kanta ajustatuta
 
         JButton menuaBtn = new JButton("Menua");
         menuaBtn.setBounds(10, 168, 89, 23);
@@ -38,12 +44,6 @@ public class ErreproduktoreaVi extends JFrame {
         contentPane.add(atzeraBtn);
 
         JButton playBtn = new JButton("Play");
-        playBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-                DBErreproduktorea.audioEntzun(cboxAbestia);
-            }
-        });
         playBtn.setBounds(170, 168, 89, 23);
         contentPane.add(playBtn);
 
@@ -70,6 +70,35 @@ public class ErreproduktoreaVi extends JFrame {
             }
         });
 
-        this.Aukera = Aukera;
+        playBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (!erreproduzitzen) {
+                     playBtn.setText("Pause");    
+                    DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1);
+                    erreproduzitzen = true;
+                } else {
+                    erreproduzitzen = false;
+                    playBtn.setText("Play");
+                    DBErreproduktorea.playEtaPausa();
+                }
+            }
+        });
+   
+        
+        aurreraBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentSongIndex = (currentSongIndex + 1) % maxSongIndex;//Hemen egiten dena, abestia +1, horrela hurrengo abestia ipiniko da erreproduktorean, gainera maxSongIndex erabiltzen dugu ipini ahal EZ izateko hurrengo abestia existitzen ez baldin bada
+                DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1);
+                erreproduzitzen = true;
+                
+            }
+        });
+        
+        atzeraBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                currentSongIndex = (currentSongIndex - 1 + maxSongIndex) % maxSongIndex; //Hurrengo abestiaren berdina baina alderantziz
+                DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1);
+            }
+        });
     }
 }

@@ -10,6 +10,7 @@ import Modelo.Bezeroa;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -145,6 +146,15 @@ public class ErregistroaVi extends JFrame {
         contentPane.add(gordeBtn);
         gordeBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
+            	if (izenaTextField.getText().isEmpty() || abizenaTextField.getText().isEmpty() ||
+                        erabiltzaileaTextField.getText().isEmpty() || pasahitzaTextField.getText().isEmpty() ||
+                        konfirmatuTextField.getText().isEmpty() || jaiotzeDataTextField.getText().isEmpty() ||
+                        erregistroDataTextField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(ErregistroaVi.this, "Derrigorrezkoak da datu guztiak betetzea.", "Datuak egoki ezarriDerrigorrezkoak da datu guztiak betetzea", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+            	
                 String izena = izenaTextField.getText();
                 String abizena = abizenaTextField.getText();
                 String erabiltzailea = erabiltzaileaTextField.getText();
@@ -176,6 +186,16 @@ public class ErregistroaVi extends JFrame {
         contentPane.add(ErosPremBtn);
         ErosPremBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
+          
+            	 if (izenaTextField.getText().isEmpty() || abizenaTextField.getText().isEmpty() ||
+            	            erabiltzaileaTextField.getText().isEmpty() || pasahitzaTextField.getText().isEmpty() ||
+            	            jaiotzeDataTextField.getText().isEmpty() || erregistroDataTextField.getText().isEmpty()) {
+            	            // Muestra un pop-up de advertencia indicando que los campos obligatorios están vacíos
+            	            JOptionPane.showMessageDialog(ErregistroaVi.this, "Datuak egoki ezarri.", "Derrigorrezkoak da datu guztiak betetzea", JOptionPane.WARNING_MESSAGE);
+            	            return; // Sal del método actionPerformed, no continúes con el proceso
+            	        }
+            	
                 String izena = izenaTextField.getText();
                 String abizena = abizenaTextField.getText();
                 String erabiltzailea = erabiltzaileaTextField.getText();
