@@ -19,6 +19,7 @@ public class AlbumVi extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private int cboxAbestia;
+    private String cboxAbestiaIzena;
     private JTextField textField_1;
 
     public AlbumVi(String cboxDiska, String erabiltzailea, int cBoxArtistaList) {
@@ -64,7 +65,8 @@ public class AlbumVi extends JFrame {
         abestiakCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cboxAbestia = abestiakCBox.getSelectedIndex();
-                AbestiErreproduktoreaVi ErreprodukzioaFrame = new AbestiErreproduktoreaVi(erabiltzailea, cboxAbestia, cBoxArtistaList);
+                cboxAbestiaIzena = abestiakCBox.getSelectedItem().toString();
+                AbestiErreproduktoreaVi ErreprodukzioaFrame = new AbestiErreproduktoreaVi(erabiltzailea, cboxAbestia, cboxAbestiaIzena, cBoxArtistaList);
                 ErreprodukzioaFrame.setVisible(true);
                 dispose();
             }

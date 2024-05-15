@@ -15,14 +15,12 @@ public class DBErreproduktorea {
     private static final int askenAbesti = 3; // Abeslari bakoitzaren kanta maximoa
     private static int azkenAbesti = -1; // Azken abestiaren indexa gordetzeko (-1 ipintzen dugu jakiteko oraindik abestirik ez dela erreproduzitu)
     
-    
-    
     // Abestia erreproduzitzeko metodoa
     public static void abestiaEntzun(int idArtista, int abestiIndex) {
         String audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
         entzun(audioIzena);
     }
-
+    
     public static void podcastEntzun(int idPodcaster, int idPodcast) {
         String audioIzena = "src/MediaP/" + idPodcaster + "_" + idPodcast + ".wav";
         entzun(audioIzena);
@@ -91,7 +89,9 @@ public class DBErreproduktorea {
         }
     }
     
-    public static String motaAtera(int cboxAbestia) {
+    
+    //Premium den edo normal ateratzeko
+    public static String bezeroMota(int cboxAbestia) {
         String mota = null;
 
         try (Connection conn = Konexioa.konektatu();
@@ -110,4 +110,5 @@ public class DBErreproduktorea {
         
         return mota;
     }
-    }
+    
+}

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import DB.DBErreproduktorea;
+import javax.swing.JLabel;
 
 public class PodcastErreproduktoreaVi extends JFrame {
 
@@ -20,7 +21,7 @@ public class PodcastErreproduktoreaVi extends JFrame {
     private boolean erreproduzitzen = false;
     private boolean isPremium; // Bezero mota gordetzeko
     
-    PodcastErreproduktoreaVi(String erabiltzailea, int cBoxPodcasterAukera, int cBoxPodcastAukera) {
+    PodcastErreproduktoreaVi(String erabiltzailea, int cBoxPodcasterAukera, String cboxPodcastAukeraIzena, int cBoxPodcastAukera) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -61,6 +62,13 @@ public class PodcastErreproduktoreaVi extends JFrame {
         JButton profilaBtn = new JButton(erabiltzailea);
         profilaBtn.setBounds(345, 11, 89, 23);
         contentPane.add(profilaBtn);
+        
+        JLabel podcastIzenaLbl = new JLabel("");
+        podcastIzenaLbl.setBounds(10, 143, 414, 14);
+        contentPane.add(podcastIzenaLbl);
+        
+        podcastIzenaLbl.setText(cboxPodcastAukeraIzena);
+        
         profilaBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import DB.DBErreproduktorea;
+import javax.swing.JLabel;
 
 public class AbestiErreproduktoreaVi extends JFrame {
 
@@ -20,7 +21,7 @@ public class AbestiErreproduktoreaVi extends JFrame {
     private boolean erreproduzitzen = false;
     private boolean isPremium; // Bezero mota gordetzeko
 
-    public AbestiErreproduktoreaVi(String erabiltzailea, int cboxAbestia, int cBoxArtistaList) {
+    public AbestiErreproduktoreaVi(String erabiltzailea, int cboxAbestia, String cboxAbestiaIzena, int cBoxArtistaList) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -28,7 +29,6 @@ public class AbestiErreproduktoreaVi extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        this.isPremium = isPremium;
         artistId = cBoxArtistaList;
         currentSongIndex = 0; // Lehenengo abestian hasteko
         maxSongIndex = 3; // Abeslari bakoitzaren kanta maximoa
@@ -61,6 +61,10 @@ public class AbestiErreproduktoreaVi extends JFrame {
         JButton profilaBtn = new JButton(erabiltzailea);
         profilaBtn.setBounds(345, 11, 89, 23);
         contentPane.add(profilaBtn);
+        
+        JLabel abestiIzenaLbl = new JLabel("");
+        abestiIzenaLbl.setBounds(10, 143, 414, 14);
+        contentPane.add(abestiIzenaLbl);
         profilaBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);

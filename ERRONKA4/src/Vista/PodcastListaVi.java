@@ -24,6 +24,7 @@ public class PodcastListaVi extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private int cboxPodcastAukera;
+    private String cboxPodcastAukeraIzena;
 
     
     public PodcastListaVi(String erabiltzailea, int cboxPodcasterAukera) {
@@ -57,8 +58,9 @@ public class PodcastListaVi extends JFrame {
        PodcastZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	cboxPodcastAukera = PodcastZerrendaCBox.getSelectedIndex();
-            	
-                 PodcastErreproduktoreaVi podcastErreprodukzioaFrame = new PodcastErreproduktoreaVi(erabiltzailea, cboxPodcasterAukera, cboxPodcastAukera + 1); 
+            	cboxPodcastAukeraIzena = PodcastZerrendaCBox.getSelectedItem().toString();
+
+                 PodcastErreproduktoreaVi podcastErreprodukzioaFrame = new PodcastErreproduktoreaVi(erabiltzailea, cboxPodcasterAukera, cboxPodcastAukeraIzena, cboxPodcastAukera + 1); 
                  podcastErreprodukzioaFrame.setVisible(true);
                  dispose();
              }
