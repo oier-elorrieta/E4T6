@@ -7,21 +7,49 @@ import javax.sound.sampled.Clip;
 public class DBErreproduktorea {
 
     private static Clip clip;
-    private static int maxSongIndex = 3; // Abeslari bakotzairen kanta maximoa
-
+    private static final int askenAbesti = 3; // Abeslari bakoitzaren kanta maximoa
+    private static int azkenAbesti = -1; // Azken abestiaren indexa gordetzeko (-1 ipintzen dugu jakiteko oraindik abestirik ez dela erreproduzitu)
+    
+    
+    
     // Abestia erreproduzitzeko metodoa
-    public static void audioEntzun(int idArtista, int idAbestia) {
-        String audioIzena = "src/Media/" + idArtista + "_" + idAbestia + ".wav";
+    public static void audioEntzun(int idArtista, int abestiIndex, String mota) {
+    	
+    	String audioIzena;
+    	
+    	if(mota.equals("musikari")) {
+    		audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
+    	}else {
+    		 audioIzena = "src/MediaP/" + idArtista + "_" + abestiIndex + ".wav";
+    	}
+    	
+    	
         File fitxa = new File(audioIzena);
 
         if (fitxa.exists()) {
             if (clip != null && clip.isRunning()) {
-                clip.stop(); // Abestirenbat momentu berdinean entzuten bada gelditzen da
+                clip.stop(); // Abestiren bat momentu berdinean entzuten bada gelditzen da
             }
             playEmon(fitxa); // Abesti berriaren erreprodukzioa hasten da
         } else {
             System.out.println(audioIzena + " ez da aurkitu");
         }
+    }
+
+    // Hurrengo abestiaren indexa lortzeko metodoa Free erabiltzaileentzat (aleatorioa)
+    public static int hurrengoRandom() {
+        int hurrengoko;
+        do {
+            hurrengoko = (int)(Math.random() * askenAbesti) + 1;
+        } while (hurrengoko == azkenAbesti);
+
+        azkenAbesti = hurrengoko;
+        return hurrengoko;
+    }
+
+    // Hurrengo abestiaren indexa lortzeko metodoa Premium erabiltzaileentzat (ordenatua)
+    public static int hurrengoOrdenatua(int currentIndex) {
+        return (currentIndex % askenAbesti) + 1;
     }
 
     // Play eta pause funtzioa
