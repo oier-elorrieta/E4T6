@@ -155,7 +155,7 @@ public class ProfilaVi extends JFrame {
             erregistroDataTextField.setText(bezeroa.getErregistrodata().toString());
             premiumMugaTextField.setText(""); 
             
-            String lehenegoBezeroa = erabiltzaileaTextField.getText();
+            String lehenengoBezeroa = erabiltzaileaTextField.getText();
            
             
         JButton editatuGordeBtn = new JButton("Aldaketak Gorde");
@@ -190,7 +190,7 @@ public class ProfilaVi extends JFrame {
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
 
                 if(DBProfila.bezKomparaketa(bezeroa, nb) == false){ 
-                	DBProfila.aktualizatuBezeroa(nb, lehenegoBezeroa);         
+                	DBProfila.aktualizatuBezeroa(nb, lehenengoBezeroa);         
         }
             }
         });

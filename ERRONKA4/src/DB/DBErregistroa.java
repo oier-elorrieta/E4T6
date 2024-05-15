@@ -12,7 +12,7 @@ public class DBErregistroa {
         try {
             Connection connection = Konexioa.konektatu();
             if (connection != null) {
-                String kontsulta = "UPDATE INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
                 preparedStatement.setString(1, nb.getIzena());
                 preparedStatement.setString(2, nb.getAbizena());
@@ -65,12 +65,7 @@ public class DBErregistroa {
                 PreparedStatement PreparedStatement = connection.prepareStatement(kontsulta);
                 PreparedStatement.setInt(1, idBezeroa);
                 PreparedStatement.setString(2, data);
-                int eragindakoErrenkadak = PreparedStatement.executeUpdate();
-                if (eragindakoErrenkadak > 0) {
-                    System.out.println("Data zuzen txertatu da");
-                } else {
-                    System.out.println("Errorea: Ezin izan da bezeroa datu-basera gehitu.");
-                }
+                PreparedStatement.execute();;
                 PreparedStatement.close();
                 connection.close();
             }
