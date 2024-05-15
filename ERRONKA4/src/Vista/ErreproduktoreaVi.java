@@ -101,7 +101,7 @@ public class ErreproduktoreaVi extends JFrame {
                     if (currentSongIndex == 0) {
                         currentSongIndex = maxSongIndex;
                     }
-                } else {
+                } else {                                                                             
                     currentSongIndex = DBErreproduktorea.hurrengoRandom();
                 }
                 DBErreproduktorea.audioEntzun(artistId, currentSongIndex, mota);

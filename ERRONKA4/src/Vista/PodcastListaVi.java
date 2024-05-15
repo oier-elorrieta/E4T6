@@ -26,7 +26,7 @@ public class PodcastListaVi extends JFrame {
 
 
     
-    public PodcastListaVi(String cboxPodcasterAukera) {
+    public PodcastListaVi(String erabiltzailea, String PodcastZerrendaCBox, int cboxPodcasterAukera) {
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -55,14 +55,19 @@ public class PodcastListaVi extends JFrame {
         for (String Izena : podcastak) {
             PodcastZerrendaCBox.addItem(Izena);     
         }    
-        
+         
        PodcastZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	cboxPodcasterAukera = PodcastZerrendaCBox.getSelectedIndex();
+                 ErreproduktoreaVi ErreprodukzioaFrame = new ErreproduktoreaVi(erabiltzailea, PodcastZerrendaCBox, cboxPodcasterAukera, false, "podcaster"); // true = premium, false = free
+                 ErreprodukzioaFrame.setVisible(true);
+                 dispose();
+             }
+         });
        
       
                
-            }
-        }); 
+
         
      
         

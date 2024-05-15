@@ -48,7 +48,7 @@ public class PodcasterrakVi extends JFrame {
             	cBoxPodcasterAukera = PodcasterraCBox.getSelectedItem().toString();
             	
            
-                PodcastListaVi podcastFrame= new PodcastListaVi(cBoxPodcasterAukera);
+                PodcastListaVi podcastFrame= new PodcastListaVi(cBoxPodcasterAukera, erabiltzailea, erabiltzailea);
                 podcastFrame.setVisible(true);
                 
                 dispose();
