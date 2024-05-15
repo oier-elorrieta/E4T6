@@ -1,15 +1,12 @@
 package Vista;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import DB.DBErreproduktorea;
 
 public class ErreproduktoreaVi extends JFrame {
@@ -21,19 +18,20 @@ public class ErreproduktoreaVi extends JFrame {
     private int currentSongIndex;
     private int maxSongIndex;
     private boolean erreproduzitzen = false;
+    private boolean isPremium; // Bezero mota gordetzeko
 
-    public ErreproduktoreaVi(String erabiltzailea, int cboxAbestia, int cBoxArtistaList) {
+    public ErreproduktoreaVi(String erabiltzailea, int cboxAbestia, int cBoxArtistaList, boolean isPremium, String mota) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        this.isPremium = isPremium;
         artistId = cBoxArtistaList;
-        currentSongIndex = 0; // Lehehengo abestian hasteko
-        maxSongIndex = 3; // Abeslari bakotzairen kanta ajustatuta
+        currentSongIndex = 0; // Lehenengo abestian hasteko
+        maxSongIndex = 3; // Abeslari bakoitzaren kanta maximoa
 
         JButton menuaBtn = new JButton("Menua");
         menuaBtn.setBounds(10, 168, 89, 23);
@@ -73,8 +71,8 @@ public class ErreproduktoreaVi extends JFrame {
         playBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!erreproduzitzen) {
-                     playBtn.setText("Pause");    
-                    DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1);
+                    playBtn.setText("Pause");
+                    DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1, mota);
                     erreproduzitzen = true;
                 } else {
                     erreproduzitzen = false;
@@ -83,21 +81,31 @@ public class ErreproduktoreaVi extends JFrame {
                 }
             }
         });
-   
-        
+
         aurreraBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                currentSongIndex = (currentSongIndex + 1) % maxSongIndex;//Hemen egiten dena, abestia +1, horrela hurrengo abestia ipiniko da erreproduktorean, gainera maxSongIndex erabiltzen dugu ipini ahal EZ izateko hurrengo abestia existitzen ez baldin bada
-                DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1);
+                if (isPremium) {
+                    currentSongIndex = DBErreproduktorea.hurrengoOrdenatua(currentSongIndex);
+                } else {
+                    currentSongIndex = DBErreproduktorea.hurrengoRandom();
+                }
+                DBErreproduktorea.audioEntzun(artistId, currentSongIndex, mota);
                 erreproduzitzen = true;
-                
             }
         });
-        
+
         atzeraBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                currentSongIndex = (currentSongIndex - 1 + maxSongIndex) % maxSongIndex; //Hurrengo abestiaren berdina baina alderantziz
-                DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1);
+                if (isPremium) {
+                    currentSongIndex = (currentSongIndex - 1 + maxSongIndex) % maxSongIndex;
+                    if (currentSongIndex == 0) {
+                        currentSongIndex = maxSongIndex;
+                    }
+                } else {
+                    currentSongIndex = DBErreproduktorea.hurrengoRandom();
+                }
+                DBErreproduktorea.audioEntzun(artistId, currentSongIndex, mota);
+                erreproduzitzen = true;
             }
         });
     }
