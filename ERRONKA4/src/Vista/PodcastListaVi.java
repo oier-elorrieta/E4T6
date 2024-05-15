@@ -23,10 +23,10 @@ public class PodcastListaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-
+    private int cboxPodcastAukera;
 
     
-    public PodcastListaVi(String erabiltzailea, String PodcastZerrendaCBox, int cboxPodcasterAukera) {
+    public PodcastListaVi(String erabiltzailea, int cboxPodcasterAukera) {
     	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -45,22 +45,21 @@ public class PodcastListaVi extends JFrame {
         PodcastZerrendaCBox.setBounds(73, 61, 290, 62);
         contentPane.add(PodcastZerrendaCBox);
         
-        int IDPodcaster = DBPodcast.PodcasterID(cboxPodcasterAukera);
-        System.out.println(IDPodcaster);
-        
-        ArrayList<Integer> IDAudio = DBPodcast.IDAudio(IDPodcaster); 
+
+        ArrayList<Integer> IDAudio = DBPodcast.IDAudio(cboxPodcasterAukera); 
         System.out.println(IDAudio);
         
         List<String> podcastak = DBPodcast.PodcastAtera(IDAudio);
-        for (String Izena : podcastak) {
-            PodcastZerrendaCBox.addItem(Izena);     
+        for (String podcast : podcastak) {
+            PodcastZerrendaCBox.addItem(podcast);     
         }    
          
        PodcastZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	cboxPodcasterAukera = PodcastZerrendaCBox.getSelectedIndex();
-                 ErreproduktoreaVi ErreprodukzioaFrame = new ErreproduktoreaVi(erabiltzailea, PodcastZerrendaCBox, cboxPodcasterAukera, false, "podcaster"); // true = premium, false = free
-                 ErreprodukzioaFrame.setVisible(true);
+            	cboxPodcastAukera = PodcastZerrendaCBox.getSelectedIndex();
+            	
+                 PodcastErreproduktoreaVi podcastErreprodukzioaFrame = new PodcastErreproduktoreaVi(erabiltzailea, cboxPodcasterAukera, cboxPodcastAukera + 1); 
+                 podcastErreprodukzioaFrame.setVisible(true);
                  dispose();
              }
          });

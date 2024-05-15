@@ -30,28 +30,7 @@ public class DBPodcast{
         return emaitza;
     }
 	
-	public static int PodcasterID(String Podcasterra) {
-	    int id = -1;
-	  
-	    try {
-	        Connection connection = Konexioa.konektatu();
-	        if (connection != null) {
-	            String kontsulta = "SELECT IDPodcaster FROM Podcasterra WHERE IzenArtistikoa = ?";
-	            PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
-	            preparedStatement.setString(1, Podcasterra); 
-	            ResultSet resultSet = preparedStatement.executeQuery();
-	            if (resultSet.next()) {
-	                id = resultSet.getInt("IDPodcaster"); 
-	            }
-	            resultSet.close();
-	            preparedStatement.close();
-	            connection.close();
-	        }
-	    } catch (SQLException e) {
-	        System.out.println("Errorea Podcasterraren ID-a ateratzean: " + e.getMessage());
-	    }
-	    return id;
-	}
+	
 	
 	public static ArrayList<Integer> IDAudio(int cboxPodcasterAukeraCbox) {
 	    ArrayList<Integer> id = new ArrayList<>();

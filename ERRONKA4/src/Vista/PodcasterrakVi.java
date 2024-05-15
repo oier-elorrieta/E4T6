@@ -22,7 +22,7 @@ public class PodcasterrakVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private String cBoxPodcasterAukera;
+    private int cBoxPodcasterAukera;
 
     public PodcasterrakVi(String erabiltzailea){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,14 +45,12 @@ public class PodcasterrakVi extends JFrame {
         
         PodcasterraCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	cBoxPodcasterAukera = PodcasterraCBox.getSelectedItem().toString();
-            	
-           
-                PodcastListaVi podcastFrame= new PodcastListaVi(cBoxPodcasterAukera, erabiltzailea, erabiltzailea);
+            	cBoxPodcasterAukera = PodcasterraCBox.getSelectedIndex();
+            	System.out.println(cBoxPodcasterAukera);
+                PodcastListaVi podcastFrame= new PodcastListaVi(erabiltzailea, cBoxPodcasterAukera);
                 podcastFrame.setVisible(true);
                 
                 dispose();
-                
             }
         }); 
 
@@ -67,15 +65,7 @@ public class PodcasterrakVi extends JFrame {
         AtzeraBotoia.setBounds(23, 227, 89, 23);
         contentPane.add(AtzeraBotoia);
         
-        JButton Erabiltzailebtn = new JButton("Aurrera");
-        Erabiltzailebtn.setBounds(335, 227, 89, 23);
-        contentPane.add(Erabiltzailebtn);
-
-        Erabiltzailebtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        
+     
         JLabel Izenburua = new JLabel("Aukeratu Podcasterra");
         Izenburua.setFont(new Font("Tahoma", Font.PLAIN, 40));
         Izenburua.setBounds(36, 11, 388, 57);

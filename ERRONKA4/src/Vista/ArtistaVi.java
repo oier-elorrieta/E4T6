@@ -64,7 +64,7 @@ public class ArtistaVi extends JFrame {
         InformazioaTextArea.setBounds(159, 60, 265, 94);
         contentPane.add(InformazioaTextArea);
 
-        System.out.println(cBoxArtistaList);
+      
         List<String> Deskribapenak = DBArtista.MusikariarenInformazioa(cBoxArtistaList);
         for (String deskribapena : Deskribapenak) {
             InformazioaTextArea.setText(deskribapena);

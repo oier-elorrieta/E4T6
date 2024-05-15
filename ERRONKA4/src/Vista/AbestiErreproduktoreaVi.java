@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import DB.DBErreproduktorea;
 
-public class ErreproduktoreaVi extends JFrame {
+public class AbestiErreproduktoreaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -20,7 +20,7 @@ public class ErreproduktoreaVi extends JFrame {
     private boolean erreproduzitzen = false;
     private boolean isPremium; // Bezero mota gordetzeko
 
-    public ErreproduktoreaVi(String erabiltzailea, int cboxAbestia, int cBoxArtistaList, boolean isPremium, String mota) {
+    public AbestiErreproduktoreaVi(String erabiltzailea, int cboxAbestia, int cBoxArtistaList) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -72,7 +72,7 @@ public class ErreproduktoreaVi extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!erreproduzitzen) {
                     playBtn.setText("Pause");
-                    DBErreproduktorea.audioEntzun(artistId, currentSongIndex + 1, mota);
+                    DBErreproduktorea.abestiaEntzun(artistId, currentSongIndex + 1);
                     erreproduzitzen = true;
                 } else {
                     erreproduzitzen = false;
@@ -89,7 +89,7 @@ public class ErreproduktoreaVi extends JFrame {
                 } else {
                     currentSongIndex = DBErreproduktorea.hurrengoRandom();
                 }
-                DBErreproduktorea.audioEntzun(artistId, currentSongIndex, mota);
+                DBErreproduktorea.abestiaEntzun(artistId, currentSongIndex);
                 erreproduzitzen = true;
             }
         });
@@ -104,7 +104,7 @@ public class ErreproduktoreaVi extends JFrame {
                 } else {                                                                             
                     currentSongIndex = DBErreproduktorea.hurrengoRandom();
                 }
-                DBErreproduktorea.audioEntzun(artistId, currentSongIndex, mota);
+                DBErreproduktorea.abestiaEntzun(artistId, currentSongIndex);
                 erreproduzitzen = true;
             }
         });

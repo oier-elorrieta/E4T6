@@ -42,7 +42,7 @@ public class DBProfila {
 	            }
 
 	            // Bezero objektua sortu
-	            bezeroa = new Bezeroa(izena, abizena, hizkuntza, user, pasahitza, jaiotzeData, erregistroData);
+	            bezeroa = new Bezeroa(izena, abizena, user, hizkuntza, pasahitza, jaiotzeData, erregistroData);
 	        } else {
 	            // Erabiltzailea ez dagoen kasua
 	            // Objektu nulua itzuli bezeroa ez dagoela adierazteko
@@ -58,22 +58,22 @@ public class DBProfila {
     
 	public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenengoBezeroa) {
 	    // Egiaztatu eremua beteta dagoela
-	    if (bezeroa.getIzena().isEmpty() || bezeroa.getAbizena().isEmpty() || bezeroa.getErabiltzailea().isEmpty() ||
+	    if (bezeroa.getIzena().isEmpty() || bezeroa.getAbizena().isEmpty() ||
 	        bezeroa.getPasahitza().isEmpty() || bezeroa.getJaiotzedata() == null || bezeroa.getErregistrodata() == null) {
 	        JOptionPane.showMessageDialog(null, "Mesedez, bete eremua beti bete.", "Eremuak bete behar dira", JOptionPane.WARNING_MESSAGE);
 	        return;
 	    }
 	    
 	    try (Connection conn = Konexioa.konektatu();
-	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Erabiltzailea = ?, Hizkuntza = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = " + lehenengoBezeroa)) {
+	         PreparedStatement stmt = conn.prepareStatement("UPDATE bezeroa SET Izena = ?, Abizena = ?, Hizkuntza = ?, Pasahitza = ?, Jaiotze_data = ?, Erregistro_data = ? WHERE Erabiltzailea = ?")) {
 	        
 	        stmt.setString(1, bezeroa.getIzena());
 	        stmt.setString(2, bezeroa.getAbizena());
-	        stmt.setString(3, bezeroa.getErabiltzailea());
-	        stmt.setString(4, bezeroa.getHizkuntza());       
-	        stmt.setString(5, bezeroa.getPasahitza());
-	        stmt.setDate(6, bezeroa.getJaiotzedata());
-	        stmt.setDate(7, bezeroa.getErregistrodata());
+	        stmt.setString(3, bezeroa.getHizkuntza());       
+	        stmt.setString(4, bezeroa.getPasahitza());
+	        stmt.setDate(5, bezeroa.getJaiotzedata());
+	        stmt.setDate(6, bezeroa.getErregistrodata());
+	        stmt.setString(7, lehenengoBezeroa); // Agregar el valor para el parámetro lehenengoBezeroa
 
 	        int erregistroakAldatutakoak = stmt.executeUpdate();
 	        if (erregistroakAldatutakoak == 0) {

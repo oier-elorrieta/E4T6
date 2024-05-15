@@ -64,7 +64,7 @@ public class AlbumVi extends JFrame {
         abestiakCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cboxAbestia = abestiakCBox.getSelectedIndex();
-                ErreproduktoreaVi ErreprodukzioaFrame = new ErreproduktoreaVi(erabiltzailea, cboxAbestia, cBoxArtistaList, false, "musikari"); // true = premium, false = free
+                AbestiErreproduktoreaVi ErreprodukzioaFrame = new AbestiErreproduktoreaVi(erabiltzailea, cboxAbestia, cBoxArtistaList);
                 ErreprodukzioaFrame.setVisible(true);
                 dispose();
             }

@@ -1,6 +1,11 @@
 package DB;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
@@ -13,29 +18,27 @@ public class DBErreproduktorea {
     
     
     // Abestia erreproduzitzeko metodoa
-    public static void audioEntzun(int idArtista, int abestiIndex, String mota) {
-    	
-    	String audioIzena;
-    	
-    	if(mota.equals("musikari")) {
-    		audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
-    	}else {
-    		 audioIzena = "src/MediaP/" + idArtista + "_" + abestiIndex + ".wav";
-    	}
-    	
-    	
-        File fitxa = new File(audioIzena);
+    public static void abestiaEntzun(int idArtista, int abestiIndex) {
+        String audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
+        entzun(audioIzena);
+    }
 
+    public static void podcastEntzun(int idPodcaster, int idPodcast) {
+        String audioIzena = "src/MediaP/" + idPodcaster + "_" + idPodcast + ".wav";
+        entzun(audioIzena);
+    }
+
+    private static void entzun(String audioIzena) {
+        File fitxa = new File(audioIzena);
         if (fitxa.exists()) {
             if (clip != null && clip.isRunning()) {
-                clip.stop(); // Abestiren bat momentu berdinean entzuten bada gelditzen da
+                clip.stop();
             }
-            playEmon(fitxa); // Abesti berriaren erreprodukzioa hasten da
+            playEmon(fitxa);
         } else {
             System.out.println(audioIzena + " ez da aurkitu");
         }
     }
-
     // Hurrengo abestiaren indexa lortzeko metodoa Free erabiltzaileentzat (aleatorioa)
     public static int hurrengoRandom() {
         int hurrengoko;
@@ -74,7 +77,7 @@ public class DBErreproduktorea {
     }
 
     // Abestia erreproduzitzeko metodoa
-    private static void playEmon(File audioFitxa) {
+    public static void playEmon(File audioFitxa) {
         try {
             if (audioFitxa.exists()) {
                 clip = AudioSystem.getClip();
@@ -87,4 +90,24 @@ public class DBErreproduktorea {
             System.out.println("Errorea audioa erreprodukziorakoan: " + e.getMessage());
         }
     }
-}
+    
+    public static String motaAtera(int cboxAbestia) {
+        String mota = null;
+
+        try (Connection conn = Konexioa.konektatu();
+             PreparedStatement stmt = conn.prepareStatement("SELECT mota FROM audio WHERE IDAudio = ?")) {
+            
+            stmt.setInt(1, cboxAbestia);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                mota = rs.getString("mota");
+            }
+        } catch (SQLException e) {
+            System.err.println("Datu-basearen errorea: " + e.getMessage());
+        }
+        
+        return mota;
+    }
+    }
