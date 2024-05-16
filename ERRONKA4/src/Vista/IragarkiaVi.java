@@ -1,8 +1,13 @@
 package Vista;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DB.DBErreproduktorea;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
@@ -18,23 +23,17 @@ public class IragarkiaVi extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        // Reproducir el archivo camaron.wav mientras la ventana está abierta
-        playCamaron();
-    }
+        
+        JLabel irudi = new JLabel();
+        
+        irudi.setBounds(115, 10, 231, 161);
+        
+        ImageIcon icon = new ImageIcon("src/MediaM/kamaronron.jpg");
+        irudi.setIcon(icon);
+        contentPane.add(irudi);
 
-    // Método para reproducir el archivo camaron.wav
-    private void playCamaron() {
-        try {
-            File camaronFile = new File("src/MediaM/camaron.wav");
-            if (camaronFile.exists()) {
-                Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(camaronFile));
-                clip.start();
-            } else {
-                System.out.println("camaron.wav ez da aurkitu");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + "Errora camaron.wav: erreproduzitzean" );
-        }
-    }
+        DBErreproduktorea.playCamaron();
+        
+        
+    } 
 }
