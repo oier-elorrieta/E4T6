@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.JOptionPane;
 
 public class DBErreproduktorea {
 
@@ -19,6 +22,12 @@ public class DBErreproduktorea {
     public static void abestiaEntzun(int idArtista, int abestiIndex) {
         String audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
         entzun(audioIzena);
+    }
+    
+    public static String erreproduzitzenDagoenAbestia(int idArtista, int abestiIndex) {
+        String audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
+        return audioIzena;
+
     }
     
     public static void podcastEntzun(int idPodcaster, int idPodcast) {
@@ -108,7 +117,61 @@ public class DBErreproduktorea {
             System.err.println("Datu-basearen errorea: " + e.getMessage());
         }
         
+        
         return mota;
     }
+    
+  //Menua Botoia
+
+    public static  List<String>playListakLortu() {
+            List<String> emaitza = new ArrayList<>();
+            try {
+                Connection connection = Konexioa.konektatu();
+                if (connection != null) {
+                    String kontsulta = "SELECT * FROM Playlist";
+                    PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    while (resultSet.next()) {
+                        emaitza.add(resultSet.getString("Izenburua"));
+                    }
+                    resultSet.close();
+                    preparedStatement.close();
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Errorea musikariak ateratzean: " + e.getMessage());
+            }
+            return emaitza;
+    	}
+    public static void aktualizatuPlayList(String aukeratutakoPlayList, int erreproduzitzenDagoenAbestia) {
+
+        try (Connection conn = Konexioa.konektatu();
+
+             PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLaylist_Abestiak (IDList, IDAudio) VALUES ((SELECT IDList FROM Playlist WHERE Izenburua = ?), ?)")) {
+
+            stmt.setString(1, aukeratutakoPlayList); // Aukeratutako zerrendaren izena
+
+            stmt.setInt(2, erreproduzitzenDagoenAbestia); // Gehitu nahi den abestiaren IDa
+
+            int erregistroakAldatutakoak = stmt.executeUpdate();
+
+            if (erregistroakAldatutakoak == 0) {
+
+                throw new SQLException("Errorea playlist-a gehitzean: Erregistroa ezin da aldatu");
+
+            } else {
+
+                System.out.println("Playlist-a gehitu da.");
+
+            }
+
+        } catch (SQLException e) {
+
+            System.err.println("Datu-basearen errorea: " + e.getMessage());
+
+            JOptionPane.showMessageDialog(null, "Datu-basearen errorea: Abesti hau jada playlist-ean gehitu da", "Errorea", JOptionPane.ERROR_MESSAGE);        }
+
+    }
+    
     
 }
