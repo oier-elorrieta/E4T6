@@ -9,8 +9,20 @@ import javax.swing.JOptionPane;
 // Salbuespenak paketea sartu
 import Salbuespenak.LogInSalbuespena;
 
+/**
+ * Login-aren logika kudeatzen du
+ *  Datu-baseari konektatzen da ea erabiltzaileen kredentzialak benetazkoak diren ala ez.
+ */
 public class DBLogIn {
-    // Metodo honek LogInSalbuespena salbuespena bota dezakeela adierazi dugu
+
+	/**
+     *  Metodo honek LogInSalbuespena salbuespena bota dezakeela adierazi dugu
+     * 
+     * @param Erabiltzailea erabiltzailearen izena
+     * @param Pasahitza 
+     * @return true sesioa zabaldu ahal izan bada, false ezin izan baden.
+     * @throws LogInSalbuespena Kredentzialak zuzenak ez badira
+     */
     public static boolean isLoginOk(String Erabiltzailea, String Pasahitza) throws LogInSalbuespena {
         try(Connection conn = Konexioa.konektatu();
              PreparedStatement stmt = conn.prepareStatement("SELECT Erabiltzailea, Pasahitza FROM bezeroa WHERE Erabiltzailea = ? AND Pasahitza = ?")) {

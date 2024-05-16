@@ -12,7 +12,18 @@ import javax.swing.JOptionPane;
 import Modelo.Bezeroa;
 import Salbuespenak.ProfilaSalbuespena;
 
+
+/**
+ * Bezeroaren perfila eta datubasearekiko harremanak kudeatu
+ */
 public class DBProfila {
+	
+	/**
+     * Erabiltzailearen informazioa hartzen du datu basetik
+     *
+     * @param erabiltzailea Hartuko den erabiltzailearen izena
+     * @return  Bezero objetu bat zein erabiltzailea den, edo null bezerorik agertu baden
+     */
 public static Bezeroa bezeroaLortu(String erabiltzailea) {
    Bezeroa bezeroa = null;
    try (Connection conn = Konexioa.konektatu();
@@ -57,6 +68,14 @@ public static Bezeroa bezeroaLortu(String erabiltzailea) {
    return bezeroa;
 }
    
+
+/**
+ * Bezeroaren informazioa eguneratzen du datu basean
+ *
+ * @param bezeroa bezeroaren datuak eguneraturik
+ * @param lehenengoBezeroa Bezeroaren lehenengo izena eguneratu baino lehen
+ * @throws ProfilaSalbuespena Erroren bat agertzen bada bezeroa eguneratzekoan
+ */
 public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenengoBezeroa) throws ProfilaSalbuespena {
     // Egiaztatu eremua beteta dagoela
     if (bezeroa.getIzena().isEmpty() || bezeroa.getAbizena().isEmpty() ||
@@ -86,6 +105,14 @@ public static void aktualizatuBezeroa(Bezeroa bezeroa, String lehenengoBezeroa) 
         JOptionPane.showMessageDialog(null, "Datu-basearen errorea: " + e.getMessage(), "Errorea", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+/**
+ * Bi objetu bezero konparatu ea berdinak diren
+ *
+ * @param bez1 Lehen Bezero objetua
+ * @param bez2 Bigarren Bezero objetua
+ * @return true berdinak badira, false berdinak ez badira
+ */
 public static boolean bezKomparaketa(Bezeroa bez1, Bezeroa bez2) {
 boolean da = false;
 

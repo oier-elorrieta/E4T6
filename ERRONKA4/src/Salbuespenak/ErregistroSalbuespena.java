@@ -1,8 +1,14 @@
 package Salbuespenak;
 
-public class ErregistroSalbuespena extends Exception{
-	 
-	public ErregistroSalbuespena() {
-	        super("Errorea erabiltzailea erregistratzerakoan");
-	    }
+/**
+ * ErregistroSalbuespena klaseak eratzen duen ErregistroSalbuespena salbuespena.
+ */
+public class ErregistroSalbuespena extends Exception {
+    
+    /**
+     * ErregistroSalbuespena klasearen eraikitzailea.
+     */
+    public ErregistroSalbuespena() {
+        super("Errorea erabiltzailea erregistratzerakoan");
+    }
 }

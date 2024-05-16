@@ -11,8 +11,19 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+
+
+/**
+ * DBArtista klaseak musika-artistekin datu-basean metodoak ditu
+ */
 public class DBArtista{
 	
+	
+
+    /**
+     *Musikarien Izenen zerrenda bat lortzen du
+     * @return artisten izenen zerrenda
+     */
 	public static List<String> MusikariakDescubritu() {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -34,6 +45,12 @@ public class DBArtista{
         return emaitza;
 	}
     
+	
+	/**
+     *Albumen tituluen zerrenda bat lortzen du, artista zehatz batena
+     * @param cboxArtista nahi dugun albumaren musikariaren ID
+     * @return musikariaren albumen izenen zerrenda
+     */
     public static List<String> MusikariarenAlbumak(int cboxArtista) {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -55,6 +72,13 @@ public class DBArtista{
         return emaitza;
     }
     
+    
+    /**
+     *Musikari baten deskripzioa ateratzen du (zerrenda bat, arttista guztiak sartu ahal izateko)
+     *
+     * @param cboxArtista informazioa nahi dugun artistaren ID-a
+     * @return Zerrenda bat deskripzioekin
+     */
     public static List<String> MusikariarenInformazioa(int cboxArtista) {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -77,7 +101,11 @@ public class DBArtista{
     }
 
   
-    
+    /**
+     * Album baten audio kantitatea
+     * @param albumaukeraCbox Nahi dugun albumaren  ID atera informazioa jakitekko
+     * @return Audio kantitatea albumaren barruan
+     */
     public static int IDAudio(int albumaukeraCbox) {
         int rowCount = 0; 
         try {
@@ -100,6 +128,13 @@ public class DBArtista{
         return rowCount;
     }
     
+    
+    /**
+     * Abestien izenen eta iraupenaren zerrenda bat lortzen du
+     *
+     * @param Album nahi dugun albumaren izena lortu
+     * @return albumen kanten izenak eta iraupenen zerrenda bat
+     */
     public static ArrayList<String> AbestiakAtera(String Album) {
         ArrayList<String> emaitza = new ArrayList<String>();
         try {
@@ -113,23 +148,23 @@ public class DBArtista{
                     String izena = resultSet.getString("Izena");
                     String iraupenaStr = resultSet.getString("Iraupena");
 
-                    // Dividimos el tiempo en partes: horas, minutos y segundos
+                    
                     String[] partes = iraupenaStr.split(":");
                     int horas = Integer.parseInt(partes[0]);
                     int minutos = Integer.parseInt(partes[1]);
                     int segundos = Integer.parseInt(partes[2]);
 
-                    // Convertimos todo a segundos
+                    
                     int iraupenaSegundos = horas * 3600 + minutos * 60 + segundos;
 
-                    // Calculamos los minutos y segundos
+                    
                     minutos = iraupenaSegundos / 60;
                     segundos = iraupenaSegundos % 60;
 
-                    // Formateamos el tiempo en minutos:segundos
+                    
                     String tiempoFormateado = String.format("%02d:%02d", minutos, segundos);
 
-                    // Agregamos el nombre de la canción y el tiempo formateado a la lista de resultados
+                    
                     emaitza.add(izena + " - " + tiempoFormateado);
                 }
                 resultSet.close();
@@ -143,6 +178,13 @@ public class DBArtista{
     }
 
 
+    
+    /**
+     * Album zehatz bateko informazioa lortzen du
+     *
+     * @param Album Informazioa lortu nahi dugun albumaren izena
+     * @return Textu kate bat albumaren informazioarekin
+     */
     public static String albumarenInformazioa(String Albuma) {
         StringBuilder emaitza = new StringBuilder();
         try {

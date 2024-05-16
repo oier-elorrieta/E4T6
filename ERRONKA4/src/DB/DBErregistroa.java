@@ -8,7 +8,19 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import Modelo.Bezeroa;
 import Salbuespenak.ErregistroSalbuespena;
+
+
+/**
+ * Bezeroen registroen kudeatzen duten metodoak ditu
+ */
 public class DBErregistroa {
+	
+	/**
+     * Bezeroaren informazioa gordetzen du datu basean
+     *
+     * @param nb Bezero objetua zein bezeroaren informazioa daukan 
+     * @throws ErregistroSalbuespena arazorenbat ateratzen baldin bada bezeroa datu basean gordetzerakoan
+     */
 	 public static void BezeroaGorde(Bezeroa nb) throws ErregistroSalbuespena {
 	        try {
 	            Connection connection = Konexioa.konektatu();
@@ -37,6 +49,13 @@ public class DBErregistroa {
 	        }
 	    }
 	
+	 
+	 /**
+	     *  Album zehatz batetik informazioa lortzen du
+	     *
+	     * @param Album informazioa lortu nahi dugun albumaren izena
+	     * @return textu kate bat albumaren informazioarekin
+	     */
     public static int idBezeroLortu(Bezeroa nb) {
         int idBezeroa = -1;
         try (Connection conn = Konexioa.konektatu();
@@ -54,12 +73,25 @@ public class DBErregistroa {
         }
         return idBezeroa;
     }
+    
+    /**
+     *  Gaurko data formatu onetan: yyyy-MM-dd.
+     *
+     * @return textu kate bat gaurko datarekin
+     */
     public static String getDataGaur() {
         LocalDate dataGaur = LocalDate.now();
         //Data Stringera aldatzen du
         String sdataGaur = dataGaur.format(DateTimeFormatter.ofPattern("yyyy-mm-dd"));
         return sdataGaur;
     }
+    
+    /**
+     * Premiumaren amaieraren data gordetzen du (bezero espezifiko batena)
+     *
+     * @param idBezeroa bezeroaren id-a
+     * @param data      premium-aren amaiera
+     */
     public static void PremiumDataGorde(int idBezeroa, String data) {
         try {
             Connection connection = Konexioa.konektatu();

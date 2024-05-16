@@ -14,30 +14,55 @@ import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.swing.JOptionPane;
 
+
+/**
+ * DBErreproduktorea Audioak erreproduzitzeko eta playlist-ak kudeatzeko metodoak ditu
+ */
 public class DBErreproduktorea {
 
     private static Clip clip;
     private static final int askenAbesti = 3; // Abeslari bakoitzaren kanta maximoa
     private static int azkenAbesti = -1; // Azken abestiaren indexa gordetzeko (-1 ipintzen dugu jakiteko oraindik abestirik ez dela erreproduzitu)
     
-    // Abestia erreproduzitzeko metodoa
+    /**
+     * Reproduce una canción de un artista dado su ID y el índice de la canción. Artista baten abestia erreproduzitzen du haren ID eta abestiaren ID-ak kontuan harturik
+     *
+     * @param idArtista artistaren ID-a
+     * @param abestiIndex abestiaren aurkibidea
+     */
     public static void abestiaEntzun(int idArtista, int abestiIndex) {
         String audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
         entzun(audioIzena);
     }
     
+    
+    /**
+     *  hari den audioaren izena hartzen du
+     *
+     * @param idArtista artistaren ID-a
+     * @param abestiIndex abestiaren aurkibidea
+     * @return audioaren fitxategiaren izena
+     */
     public static String erreproduzitzenDagoenAbestia(int idArtista, int abestiIndex) {
         String audioIzena = "src/MediaM/" + idArtista + "_" + abestiIndex + ".wav";
         return audioIzena;
 
     }
     
+    /**
+     * Podkast erreproduzitzen du podkaster ID eta podkast ID kontuan harturikk
+     *
+     * @param idPodcaster podkasterraren ID-a
+     * @param idPodcast podkastaren ID-a
+     */
     public static void podcastEntzun(int idPodcaster, int idPodcast) {
         String audioIzena = "src/MediaP/" + idPodcaster + "_" + idPodcast + ".wav";
         entzun(audioIzena);
     }
     
-   
+    /**
+     * "camaron.wav". erreproduzitzen du.
+     */
         public static void playCamaron() {
             try {
                 File camaronFile = new File("src/MediaM/camaron.wav");
@@ -63,7 +88,11 @@ public class DBErreproduktorea {
         }
     
 
-
+        /**
+         *  Audioa erreproduzitzen du beraren izenarekin (fitxategietan begiratzen)
+         *
+         * @param audioIzena audioaren fitxategiaren izena
+         */
     public static void entzun(String audioIzena) {
         File fitxa = new File(audioIzena);
         if (fitxa.exists()) {
@@ -75,7 +104,12 @@ public class DBErreproduktorea {
             System.out.println(audioIzena + " ez da aurkitu");
         }
     }
-    // Hurrengo abestiaren indexa lortzeko metodoa Free erabiltzaileentzat (aleatorioa)
+    
+    /**
+     * Hurrengo abestiaren aurkibidea lortzen du ausazko moduan
+     *
+     * @return hurrengo abestiaren aurkibidea
+     */
     public static int hurrengoRandom() {
         int hurrengoko;
         do {
@@ -86,12 +120,19 @@ public class DBErreproduktorea {
         return hurrengoko;
     }
 
-    // Hurrengo abestiaren indexa lortzeko metodoa Premium erabiltzaileentzat (ordenatua)
+    /**
+     * Hurrengo abestiaren aurkibidea lortzen du baina modu ordenatuan
+     *
+     * @param currentIndex momentu onetako abestiaren aurkibidea
+     * @return hurrengo abestiaren aurkibidea
+     */
     public static int hurrengoOrdenatua(int currentIndex) {
         return (currentIndex % askenAbesti) + 1;
     }
 
-    // Play eta pause funtzioa
+    /**
+     * Abestia gelditu eta erreproduzitu
+     */
     public static void playEtaPausa() {
         if (clip != null) {
             if (clip.isRunning()) {
@@ -104,7 +145,9 @@ public class DBErreproduktorea {
         }
     }
 
-    // Abestia hasieratik erreproduzitzeko
+    /**
+     * Audioak hasieratik erreproduzitzen da.
+     */
     public static void replay() {
         if (clip != null) {
             clip.setFramePosition(0); // Hasierara joan
@@ -112,7 +155,11 @@ public class DBErreproduktorea {
         }
     }
 
-    // Abestia erreproduzitzeko metodoa
+    /**
+     * Hartutako audioaren fitxategia erreproduzitzen du
+     *
+     * @param audioFitxa audioaren fitxategia
+     */
     public static void playEmon(File audioFitxa) {
         try {
             if (audioFitxa.exists()) {
@@ -128,7 +175,12 @@ public class DBErreproduktorea {
     }
     
     
-    //Premium den edo normal ateratzeko
+    /**
+     * Bezero mota llortzen du, beraren ID-aren arabera (FREE edo Premium)
+     *
+     * @param cboxAbestia audioaren ID-a
+     * @return bezero mota
+     */
     public static String bezeroMota(int cboxAbestia) {
         String mota = null;
 
@@ -168,6 +220,12 @@ public class DBErreproduktorea {
             }
             return emaitza;
     	}
+    
+    /**
+     * Playlist guztiak lortzen ditu
+     *
+     * @return zerrenda bat playlist-en izenekin
+     */
     public static void aktualizatuPlayList(String aukeratutakoPlayList, int erreproduzitzenDagoenAbestia) {
 
         try (Connection conn = Konexioa.konektatu();
@@ -185,7 +243,12 @@ public class DBErreproduktorea {
            JOptionPane.showMessageDialog(null, "Datu-basearen errorea: Abesti hau jada playlist-ean gehitu da", "Errorea", JOptionPane.ERROR_MESSAGE);        }
     }
 
-  //Gustoko botoia
+    /**
+     *  Playlist-ak eguneratzen du abesti berriekin
+     *
+     * @param aukeratutakoPlayList playlist-aren izena
+     * @param erreproduzitzenDagoenAbestia gehituko den abestiaren id-a
+     */
     public static void gustokoakPlayList(int erreproduzitzenDagoenAbestia) {
         try (Connection conn = Konexioa.konektatu();
              PreparedStatement stmt = conn.prepareStatement("INSERT INTO Gustukoak (IDBezeroa, IDAudio) VALUES (?, ?)")) {

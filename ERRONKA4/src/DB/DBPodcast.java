@@ -7,8 +7,17 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Podkasten eta datu baseko operazioak kudeatzen ditu
+ */
 public class DBPodcast{
 	
+	
+	/**
+     * Recupera una lista de nombres de podcasters desde la base de datos. Podkasterren zerrenda bat lortzen du datu basetik
+     *
+     * @return Podkasterren izenen zerrenda
+     */
 	public static List<String> PodcasterrakDescubritu() {
         List<String> emaitza = new ArrayList<>();
         try {
@@ -30,8 +39,13 @@ public class DBPodcast{
         return emaitza;
     }
 	
-	
-	
+
+	 /**
+     * Podkaster baten audioen ID zerrenda bat lortzen du
+     *
+     * @param cboxPodcasterAukeraCbox Podkasterren ID-a
+     * @return Audioen ID zerrenda
+     */
 	public static ArrayList<Integer> IDAudio(int cboxPodcasterAukeraCbox) {
 	    ArrayList<Integer> id = new ArrayList<>();
 	    try {
@@ -54,7 +68,12 @@ public class DBPodcast{
 	    return id;
 	}
 	
-	
+	/**
+     * Recupera una lista de nombres y duraciones de podcasts a partir de una lista de IDs de audios. Audioen ID-etatik podkasten
+     *
+     * @param iDAudio Una lista de IDs de audios.
+     * @return Una lista de descripciones de podcasts, que incluyen el nombre y la duración.
+     */
 	 public static List<String> PodcastAtera(ArrayList<Integer> iDAudio) {
 		    List<String> emaitza = new ArrayList<>();
 		    try {

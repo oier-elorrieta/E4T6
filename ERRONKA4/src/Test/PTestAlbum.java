@@ -1,11 +1,13 @@
 package Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,89 +15,118 @@ import Modelo.Album;
 
 public class PTestAlbum {
 
-    private Album album;
-    private ArrayList<Album> abestiak;
+    private Album album1;
+    private Album album2;
 
     @Before
-    public void setUp() {
-        int id = 1;
-        String izenburua = "2023-ko oberenak";
-        int urtea = 2023;
-        String generoa = "Urbano";
-        abestiak = new ArrayList<>();
-        album = new Album(id, izenburua, urtea, generoa, abestiak);
+    public void setUp() throws Exception {
+        // Creamos dos objetos Album para utilizar en las pruebas
+        ArrayList<Album> abestiak = new ArrayList<>();
+        abestiak.add(new Album(1, "Abesti 1", 2022, "Rock", null));
+        abestiak.add(new Album(2, "Abesti 2", 2023, "Pop", null));
+
+        album1 = new Album(1, "Album 1", 2021, "Rock", abestiak);
+        album2 = new Album(2, "Album 2", 2020, "Pop", null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        // Limpiamos los objetos Album después de cada prueba
+        album1 = null;
+        album2 = null;
     }
 
     @Test
     public void testGetId() {
-        assertEquals(1, album.getId());
+        assertEquals(1, album1.getId());
+        assertEquals(2, album2.getId());
     }
 
     @Test
     public void testSetId() {
-        album.setId(2);
-        assertEquals(2, album.getId());
+        album1.setId(10);
+        assertEquals(10, album1.getId());
     }
 
     @Test
     public void testGetIzenburua() {
-        assertEquals("2023-ko oberenak", album.getIzenburua());
+        assertEquals("Album 1", album1.getIzenburua());
+        assertEquals("Album 2", album2.getIzenburua());
     }
 
     @Test
     public void testSetIzenburua() {
-        album.setIzenburua("Entzunenak");
-        assertEquals("Entzunenak", album.getIzenburua());
+        album1.setIzenburua("New Album 1");
+        assertEquals("New Album 1", album1.getIzenburua());
     }
 
     @Test
     public void testGetUrtea() {
-        assertEquals(2023, album.getUrtea());
+        assertEquals(2021, album1.getUrtea());
+        assertEquals(2020, album2.getUrtea());
     }
 
     @Test
     public void testSetUrtea() {
-        album.setUrtea(2024);
-        assertEquals(2024, album.getUrtea());
+        album1.setUrtea(2025);
+        assertEquals(2025, album1.getUrtea());
     }
 
     @Test
     public void testGetGeneroa() {
-        assertEquals("Urbano", album.getGeneroa());
+        assertEquals("Rock", album1.getGeneroa());
+        assertEquals("Pop", album2.getGeneroa());
     }
 
     @Test
     public void testSetGeneroa() {
-        album.setGeneroa("Pop");
-        assertEquals("Pop", album.getGeneroa());
+        album1.setGeneroa("Hip Hop");
+        assertEquals("Hip Hop", album1.getGeneroa());
     }
 
     @Test
     public void testGetAbestiak() {
-        assertNotNull(album.getAbestiak());
-        assertEquals(0, album.getAbestiak().size());
+        ArrayList<Album> abestiak = album1.getAbestiak();
+        assertEquals(2, abestiak.size());
+        assertEquals("Abesti 1", abestiak.get(0).getIzenburua());
+        assertEquals("Abesti 2", abestiak.get(1).getIzenburua());
     }
 
     @Test
     public void testSetAbestiak() {
-        ArrayList<Album> Abestiak2 = new ArrayList<>();
-        Abestiak2.add(new Album(2, "Entzunenak", 2024, "Pop", new ArrayList<>()));
-        album.setAbestiak(Abestiak2);
-        assertEquals(Abestiak2, album.getAbestiak());
+        ArrayList<Album> abestiak = new ArrayList<>();
+        abestiak.add(new Album(3, "Abesti 3", 2025, "Pop", null));
+        album2.setAbestiak(abestiak);
+        assertEquals(1, album2.getAbestiak().size());
+        assertEquals("Abesti 3", album2.getAbestiak().get(0).getIzenburua());
     }
-    
+
     @Test
-    public void testEquals() {
+    public void testEqualsObject() {
+        Album album1Copy = new Album(1, "Album 1", 2021, "Rock", null);
 
-        Album album1 = new Album(1, "Best Album", 2024, "Rock", null);
-        Album album2 = new Album(1, "Best Album", 2024, "Rock", null);
+        // Los objetos album1 y album1Copy deben ser iguales
+        assertEquals(album1, album1Copy);
 
-        assertTrue(album1.equals(album2));
+        // Los objetos album1 y album2 deben ser diferentes
+        assertNotEquals(album1, album2);
+    }
+
+    @Test
+    public void testHashCode() {
+        Album album1Copy = new Album(1, "Album 1", 2021, "Rock", null);
+
+        // Los objetos album1 y album1Copy deben tener el mismo hashCode
+        assertEquals(album1.hashCode(), album1Copy.hashCode());
+
+        // Los objetos album1 y album2 deben tener diferentes hashCode
+        assertNotEquals(album1.hashCode(), album2.hashCode());
     }
 
     @Test
     public void testToString() {
-        String Esperado = "Album [id=1, izenburua=2023-ko oberenak, urtea=2023, generoa=Urbano, Abestiak=[]]";
-        assertEquals(Esperado, album.toString());
+        String expected = "Album [id=1, izenburua=Album 1, urtea=2021, generoa=Rock, Abestiak=[Album [id=1, izenburua=Abesti 1, urtea=2022, generoa=Rock, Abestiak=null], Album [id=2, izenburua=Abesti 2, urtea=2023, generoa=Pop, Abestiak=null]]]";
+        assertEquals(expected, album1.toString());
     }
+
 }
