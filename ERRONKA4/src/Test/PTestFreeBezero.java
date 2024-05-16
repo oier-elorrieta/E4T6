@@ -11,7 +11,7 @@ import Modelo.FreeBezero;
 
 import java.sql.Date;
 
-public class TestFreeBezero {
+public class PTestFreeBezero {
 
     private FreeBezero freeBezero;
 

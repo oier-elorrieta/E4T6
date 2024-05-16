@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestMusikaria {
+public class PTestMusikaria {
 
     private Musikaria musikaria;
     private ArrayList<Musikaria> album;

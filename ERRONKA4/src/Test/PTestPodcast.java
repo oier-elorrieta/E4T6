@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import Modelo.Podcast;
 
-public class TestPodcast {
+public class PTestPodcast {
 
     private Podcast podcast;
 

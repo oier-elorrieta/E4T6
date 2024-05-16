@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import Modelo.Audio;
 
-public class TestAudio {
+public class PTestAudio {
 
     private Audio audio;
 

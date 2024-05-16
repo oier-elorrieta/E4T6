@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import Modelo.Bezeroa;
 
-public class TestBezero {
+public class PTestBezero {
 
     private Bezeroa bezeroa;
 

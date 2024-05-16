@@ -11,7 +11,7 @@ import org.junit.Test;
 import Modelo.Album;
 import Modelo.Playlist;
 
-public class TestPlaylist {
+public class PTestPlaylist {
 
     private Playlist playlist;
 

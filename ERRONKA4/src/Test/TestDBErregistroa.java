@@ -19,7 +19,6 @@ import org.junit.Test;
 import DB.DBErregistroa;
 import DB.Konexioa;
 import Modelo.Bezeroa;
-import Salbuespenak.ErregistroSalbuespena;
 
 public class TestDBErregistroa {
     private static Connection connection;
@@ -48,12 +47,7 @@ public class TestDBErregistroa {
     @Test
     public void testBezeroaGorde() {
         // Bezero bat sartu ahal den datubasean
-        try {
-			DBErregistroa.BezeroaGorde(bezeroa);
-		} catch (ErregistroSalbuespena e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        DBErregistroa.BezeroaGorde(bezeroa);
 
         // Ia bezeroa benetan txertatu den
         int idBezeroa = DBErregistroa.idBezeroLortu(bezeroa);
@@ -63,12 +57,7 @@ public class TestDBErregistroa {
     @Test
     public void testIdBezeroLortu() {
         // Bezero berri bat txertatu funtzioa frogatzeko
-        try {
-			DBErregistroa.BezeroaGorde(bezeroa);
-		} catch (ErregistroSalbuespena e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        DBErregistroa.BezeroaGorde(bezeroa);
 
         // Bezeroaren ID-a lortu
         int idBezeroa = DBErregistroa.idBezeroLortu(bezeroa);
@@ -90,12 +79,7 @@ public class TestDBErregistroa {
     @Test
     public void testPremiumDataGorde() {
 
-        try {
-			DBErregistroa.BezeroaGorde(bezeroa);
-		} catch (ErregistroSalbuespena e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        DBErregistroa.BezeroaGorde(bezeroa);
 
         // Bezeroaren ID-a atera (auto increment denez beti egin behar da)
         int idBezeroa = DBErregistroa.idBezeroLortu(bezeroa);

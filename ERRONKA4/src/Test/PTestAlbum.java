@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import Modelo.Album;
 
-public class TestAlbum {
+public class PTestAlbum {
 
     private Album album;
     private ArrayList<Album> abestiak;

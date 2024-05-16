@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import Modelo.Abestia;
 
-public class TestAbestia {
+public class PTestAbestia {
 
     private Abestia abestia1;
     private Abestia abestia2;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestPodcaster {
+public class PTestPodcaster {
 
     private Podcaster podcaster;
     private ArrayList<Podcaster> podkasterrak;

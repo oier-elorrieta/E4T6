@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import DB.DBLogIn;
 import DB.Konexioa;
-import Salbuespenak.LogInSalbuespena;
 
 public class TestDBLogin {
 
@@ -43,12 +42,7 @@ public class TestDBLogin {
         }
 
         // Login-a frogatu kredentzial zuzenekin
-        try {
-			assertTrue(DBLogIn.isLoginOk(erabiltzailea, pasahitza));
-		} catch (LogInSalbuespena e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        assertTrue(DBLogIn.isLoginOk(erabiltzailea, pasahitza));
     }
 
     @Test
@@ -57,12 +51,7 @@ public class TestDBLogin {
         String pasahitza = "b";
 
         // Login-a frogatu kredentzial EZ zuzenekin
-        try {
-			assertFalse(DBLogIn.isLoginOk(erabiltzailea, pasahitza));
-		} catch (LogInSalbuespena e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        assertFalse(DBLogIn.isLoginOk(erabiltzailea, pasahitza));
     }
 
 }

@@ -11,7 +11,7 @@ import java.sql.Date;
 
 import Modelo.Premium;
 
-public class TestPremium {
+public class PTestPremium {
 
     private Premium premium;
 

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import DB.Konexioa;
 
-public class TestKonexioa {
+public class PTestKonexioa {
 
     private static Connection connection;
 

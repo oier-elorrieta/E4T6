@@ -20,41 +20,6 @@ public class TestDBMenua {
 
     private static Connection connection;
 
-    @BeforeClass
-    public static void setUpBeforeClass() throws Exception {
-        connection = Konexioa.konektatu();
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        connection.close();
-    }
-
-    @Test
-    public void testMusikaDescubritu() {
-        List<String> expected = obtenerResultadoEsperado("SELECT IzenArtistikoa FROM musikaria");
-        List<String> actual = DBArtista.MusikariakDescubritu();
-
-        // Hau gpt esan dit, erantzunak ordenatzeko da. Egiten duena: goranzkako ordena hartzen dute 
-        Collections.sort(expected);
-        Collections.sort(actual);
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testMusikariarenAlbumak() {
-        int comboboxaukera = 1;
-        List<String> expected = obtenerResultadoEsperado("SELECT Izenburua FROM album WHERE IDMusikaria = " + comboboxaukera);
-        List<String> actual = DBArtista.MusikariarenAlbumak(comboboxaukera);
-
-        // Ordenar los resultados antes de comparar
-        Collections.sort(expected);
-        Collections.sort(actual);
-
-        assertEquals(expected, actual);
-    }
-
     private List<String> obtenerResultadoEsperado(String query) {
         try (PreparedStatement stmt = connection.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
@@ -70,5 +35,38 @@ public class TestDBMenua {
             System.err.println("Error al obtener el resultado esperado: " + e.getMessage());
             return null;
         }
+    }
+    
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        connection = Konexioa.konektatu();
+    }
+
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+        connection.close();
+    }
+
+    @Test
+    public void testMusikaDescubritu() {
+        List<String> expected = obtenerResultadoEsperado("SELECT IzenArtistikoa FROM musikaria");
+        List<String> actual = DBArtista.MusikariakDescubritu();
+
+        Collections.sort(expected);
+        Collections.sort(actual);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testMusikariarenAlbumak() {
+        int comboboxaukera = 1;
+        List<String> expected = obtenerResultadoEsperado("SELECT Izenburua FROM album WHERE IDMusikaria = " + comboboxaukera);
+        List<String> actual = DBArtista.MusikariarenAlbumak(comboboxaukera);
+
+        Collections.sort(expected);
+        Collections.sort(actual);
+
+        assertEquals(expected, actual);
     }
 }
