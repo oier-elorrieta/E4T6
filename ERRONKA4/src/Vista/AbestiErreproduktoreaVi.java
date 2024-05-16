@@ -25,7 +25,6 @@ public class AbestiErreproduktoreaVi extends JFrame {
     private boolean erreproduzitzen = false;
     private boolean isPremium; // Bezero mota gordetzeko
     private static Clip clip;
-    private int kont = 0;
 
     public AbestiErreproduktoreaVi(String erabiltzailea, int cboxAbestia, String cboxAbestiaIzena, int cBoxArtistaList) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,7 +42,7 @@ public class AbestiErreproduktoreaVi extends JFrame {
         menuaBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String entzutenDenAbestia = DBErreproduktorea.erreproduzitzenDagoenAbestia(cBoxArtistaList, currentSongIndex + 1);
-               
+              
                 List<String> playlists = DBErreproduktorea.playListakLortu();
                 if (playlists.isEmpty()) {
                     System.out.println("Ez dago playlist-ik aurkitu.");
@@ -58,6 +57,7 @@ public class AbestiErreproduktoreaVi extends JFrame {
                         playlists.get(0));
 
                 if (selectedPlaylist != null) {
+                    System.out.println("Playlist aukeratua: " + selectedPlaylist);
                     DBErreproduktorea.aktualizatuPlayList(selectedPlaylist, cboxAbestia); // cboxAbestia aldagaia erreproduzitzenDagoenAbestia aldagaia ordez
                 } else {
                     System.out.println("Playlist-a ez da aukeratu.");
@@ -80,20 +80,28 @@ public class AbestiErreproduktoreaVi extends JFrame {
         JButton aurreraBtn = new JButton(">");
         aurreraBtn.setBounds(284, 168, 41, 23);
         contentPane.add(aurreraBtn);
+        aurreraBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (isPremium) {
+                    currentSongIndex = DBErreproduktorea.hurrengoOrdenatua(currentSongIndex);
+                } else {
+                    currentSongIndex = DBErreproduktorea.hurrengoRandom();
+                }
+                DBErreproduktorea.podcastEntzun(artistId, currentSongIndex);
+                erreproduzitzen = true;
+            }
+        });
 
         JButton gustokoaBtn = new JButton("Gustokoa");
         gustokoaBtn.setBounds(335, 168, 89, 23);
         contentPane.add(gustokoaBtn);
         gustokoaBtn.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
+            String gustokoaPlaylist = "Gustokoak";
+            DBErreproduktorea.gustokoakPlayList( cboxAbestia);
 
-            String gustokoaPlaylist = "Gustokoak"; 
-
-            DBErreproduktorea.gustokoakPlayList( cboxAbestia); 
-            	    }
-
-            	});
+               }
+            });
 
         textField = new JTextField();
         textField.setBounds(13, 202, 411, 48);
@@ -101,12 +109,15 @@ public class AbestiErreproduktoreaVi extends JFrame {
         textField.setColumns(10);
 
         JButton profilaBtn = new JButton(erabiltzailea);
-        profilaBtn.setBounds(345, 11, 89, 23);
+        profilaBtn.setBounds(335, 11, 89, 23);
         contentPane.add(profilaBtn);
-        
+       
         JLabel abestiIzenaLbl = new JLabel("");
         abestiIzenaLbl.setBounds(10, 143, 414, 14);
         contentPane.add(abestiIzenaLbl);
+        
+        abestiIzenaLbl.setText(cboxAbestiaIzena);
+        
         profilaBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
@@ -133,15 +144,10 @@ public class AbestiErreproduktoreaVi extends JFrame {
                 if (isPremium) {
                     currentSongIndex = DBErreproduktorea.hurrengoOrdenatua(currentSongIndex);
                 } else {
-                	kont++;
-                	if(kont == 2) {
-                	IragarkiaVi iragarkiFrame = new IragarkiaVi();
-                	iragarkiFrame.setVisible(true);
-                	erreproduzitzen = false;
-                	}else {
-                	}
+               
+                IragarkiaVi iragarkiFrame = new IragarkiaVi();
+                iragarkiFrame.setVisible(true);
                     currentSongIndex = DBErreproduktorea.hurrengoRandom();
-                
                 }
                 DBErreproduktorea.abestiaEntzun(artistId, currentSongIndex);
                 erreproduzitzen = true;
@@ -156,7 +162,7 @@ public class AbestiErreproduktoreaVi extends JFrame {
                         currentSongIndex = maxSongIndex;
                     }
                 } else {  
-                	
+               
                     currentSongIndex = DBErreproduktorea.hurrengoRandom();
                 }
                 DBErreproduktorea.abestiaEntzun(artistId, currentSongIndex);

@@ -2,6 +2,8 @@ package Vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import DB.DBErreproduktorea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class PodcastErreproduktoreaVi extends JFrame {
 
@@ -20,7 +23,7 @@ public class PodcastErreproduktoreaVi extends JFrame {
     private int maxSongIndex;
     private boolean erreproduzitzen = false;
     private boolean isPremium; // Bezero mota gordetzeko
-    
+   
     PodcastErreproduktoreaVi(String erabiltzailea, int cBoxPodcasterAukera, String cboxPodcastAukeraIzena, int cBoxPodcastAukera) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -37,6 +40,34 @@ public class PodcastErreproduktoreaVi extends JFrame {
         JButton menuaBtn = new JButton("Menua");
         menuaBtn.setBounds(10, 168, 89, 23);
         contentPane.add(menuaBtn);
+        menuaBtn.setBounds(10, 168, 89, 23);
+        contentPane.add(menuaBtn);
+        menuaBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String entzutenDenAbestia = DBErreproduktorea.erreproduzitzenDagoenAbestia(cBoxPodcastAukera, currentSongIndex + 1);
+                System.out.println(entzutenDenAbestia);
+                List<String> playlists = DBErreproduktorea.playListakLortu();
+                if (playlists.isEmpty()) {
+                    System.out.println("Ez dago playlist-ik aurkitu.");
+                    return;
+                }
+                String selectedPlaylist = (String) JOptionPane.showInputDialog(null,
+                        "Aukeratu playlist-a:",
+                        "Playlist-ak",
+                        JOptionPane.PLAIN_MESSAGE,
+                        null,
+                        playlists.toArray(),
+                        playlists.get(0));
+
+                if (selectedPlaylist != null) {
+                    System.out.println("Playlist aukeratua: " + selectedPlaylist);
+                    DBErreproduktorea.aktualizatuPlayList(selectedPlaylist, cBoxPodcasterAukera); // cboxAbestia aldagaia erreproduzitzenDagoenAbestia aldagaia ordez
+                } else {
+                    System.out.println("Playlist-a ez da aukeratu.");
+                }
+            }
+        });
+        
 
         JButton atzeraBtn = new JButton("<");
         atzeraBtn.setBounds(109, 168, 41, 23);
@@ -60,15 +91,15 @@ public class PodcastErreproduktoreaVi extends JFrame {
         textField.setColumns(10);
 
         JButton profilaBtn = new JButton(erabiltzailea);
-        profilaBtn.setBounds(345, 11, 89, 23);
+        profilaBtn.setBounds(335, 11, 89, 23);
         contentPane.add(profilaBtn);
-        
+       
         JLabel podcastIzenaLbl = new JLabel("");
         podcastIzenaLbl.setBounds(10, 143, 414, 14);
         contentPane.add(podcastIzenaLbl);
-        
+       
         podcastIzenaLbl.setText(cboxPodcastAukeraIzena);
-        
+       
         profilaBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
@@ -109,7 +140,7 @@ public class PodcastErreproduktoreaVi extends JFrame {
                     if (currentSongIndex == 0) {
                         currentSongIndex = maxSongIndex;
                     }
-                } else {                                                                             
+                } else {                                                                            
                     currentSongIndex = DBErreproduktorea.hurrengoRandom();
                 }
                 DBErreproduktorea.podcastEntzun(artistId, currentSongIndex);

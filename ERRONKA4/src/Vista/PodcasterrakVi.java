@@ -46,7 +46,6 @@ public class PodcasterrakVi extends JFrame {
         PodcasterraCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	cBoxPodcasterAukera = PodcasterraCBox.getSelectedIndex();
-            	System.out.println(cBoxPodcasterAukera);
                 PodcastListaVi podcastFrame= new PodcastListaVi(erabiltzailea, cBoxPodcasterAukera);
                 podcastFrame.setVisible(true);
                 

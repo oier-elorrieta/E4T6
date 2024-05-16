@@ -16,6 +16,7 @@ import DB.DBPodcast;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 
 
@@ -26,9 +27,9 @@ public class PodcastListaVi extends JFrame {
     private int cboxPodcastAukera;
     private String cboxPodcastAukeraIzena;
 
-    
+   
     public PodcastListaVi(String erabiltzailea, int cboxPodcasterAukera) {
-    	
+   
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -36,41 +37,52 @@ public class PodcastListaVi extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        
+       
         JLabel DiskaZerLbl = new JLabel("Podcast Zerrenda");
         DiskaZerLbl.setFont(new Font("Tahoma", Font.PLAIN, 30));
         DiskaZerLbl.setBounds(101, 11, 248, 39);
         contentPane.add(DiskaZerLbl);
-        
+       
         JComboBox<String> PodcastZerrendaCBox = new JComboBox<>();
         PodcastZerrendaCBox.setBounds(73, 61, 290, 62);
         contentPane.add(PodcastZerrendaCBox);
-        
+       
+        JButton AtzeraBotoia = new JButton("Atzera");
+        AtzeraBotoia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            PodcasterrakVi menuaframe= new PodcasterrakVi(erabiltzailea);
+                menuaframe.setVisible(true);
+                setVisible(false);
+            }
+        });
+        AtzeraBotoia.setBounds(23, 227, 89, 23);
+        contentPane.add(AtzeraBotoia);
+       
 
-        ArrayList<Integer> IDAudio = DBPodcast.IDAudio(cboxPodcasterAukera); 
+        ArrayList<Integer> IDAudio = DBPodcast.IDAudio(cboxPodcasterAukera);
         System.out.println(IDAudio);
-        
+       
         List<String> podcastak = DBPodcast.PodcastAtera(IDAudio);
         for (String podcast : podcastak) {
-            PodcastZerrendaCBox.addItem(podcast);     
+            PodcastZerrendaCBox.addItem(podcast);    
         }    
          
        PodcastZerrendaCBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	cboxPodcastAukera = PodcastZerrendaCBox.getSelectedIndex();
-            	cboxPodcastAukeraIzena = PodcastZerrendaCBox.getSelectedItem().toString();
+            cboxPodcastAukera = PodcastZerrendaCBox.getSelectedIndex();
+            cboxPodcastAukeraIzena = PodcastZerrendaCBox.getSelectedItem().toString();
 
-                 PodcastErreproduktoreaVi podcastErreprodukzioaFrame = new PodcastErreproduktoreaVi(erabiltzailea, cboxPodcasterAukera, cboxPodcastAukeraIzena, cboxPodcastAukera + 1); 
+                 PodcastErreproduktoreaVi podcastErreprodukzioaFrame = new PodcastErreproduktoreaVi(erabiltzailea, cboxPodcasterAukera, cboxPodcastAukeraIzena, cboxPodcastAukera + 1);
                  podcastErreprodukzioaFrame.setVisible(true);
                  dispose();
              }
          });
        
-      
+     
                
 
-        
+       
      
-        
+       
     }
 }
