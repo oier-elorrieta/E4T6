@@ -43,7 +43,7 @@ public class AbestiErreproduktoreaVi extends JFrame {
         menuaBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String entzutenDenAbestia = DBErreproduktorea.erreproduzitzenDagoenAbestia(cBoxArtistaList, currentSongIndex + 1);
-                System.out.println(entzutenDenAbestia);
+               
                 List<String> playlists = DBErreproduktorea.playListakLortu();
                 if (playlists.isEmpty()) {
                     System.out.println("Ez dago playlist-ik aurkitu.");
@@ -58,7 +58,6 @@ public class AbestiErreproduktoreaVi extends JFrame {
                         playlists.get(0));
 
                 if (selectedPlaylist != null) {
-                    System.out.println("Playlist aukeratua: " + selectedPlaylist);
                     DBErreproduktorea.aktualizatuPlayList(selectedPlaylist, cboxAbestia); // cboxAbestia aldagaia erreproduzitzenDagoenAbestia aldagaia ordez
                 } else {
                     System.out.println("Playlist-a ez da aukeratu.");

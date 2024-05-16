@@ -1,6 +1,8 @@
 package Vista;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,6 +29,13 @@ public class MusikaKudeatzaileaVi extends JFrame {
 		JButton artistakBtn = new JButton("Artistak");
 		artistakBtn.setBounds(137, 46, 89, 23);
 		contentPane.add(artistakBtn);
+		artistakBtn.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	            	 AdminMenuaVi adminMenuaFrame = new AdminMenuaVi(erabiltzailea);
+	            	 adminMenuaFrame.setVisible(true);
+	                 setVisible(false);
+	            }
+	        });
 		
 		JButton albumakBtn = new JButton("Albumak");
 		albumakBtn.setBounds(137, 93, 89, 23);
@@ -35,5 +44,16 @@ public class MusikaKudeatzaileaVi extends JFrame {
 		JButton kantakBtn = new JButton("Kantak");
 		kantakBtn.setBounds(137, 144, 89, 23);
 		contentPane.add(kantakBtn);
+		
+		JButton atzeraBtn = new JButton("Atzera");
+		atzeraBtn.setBounds(10, 227, 89, 23);
+		contentPane.add(atzeraBtn);
+		  atzeraBtn.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent e) {
+	               AdminMenuaVi adminMenuaframe= new AdminMenuaVi(erabiltzailea);
+	                adminMenuaframe.setVisible(true);
+	                setVisible(false);
+	            }
+	        });
 	}
 }

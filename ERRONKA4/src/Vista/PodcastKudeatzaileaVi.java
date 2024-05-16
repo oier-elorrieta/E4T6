@@ -1,6 +1,8 @@
 package Vista;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,6 +35,17 @@ public class PodcastKudeatzaileaVi extends JFrame {
 		JButton podcastSortuBtn = new JButton("Podcast Sortu");
 		podcastSortuBtn.setBounds(249, 71, 120, 23);
 		contentPane.add(podcastSortuBtn);
+		
+		JButton atzeraBtn = new JButton("Atzera");
+		atzeraBtn.setBounds(163, 201, 89, 23);
+		contentPane.add(atzeraBtn);
+		atzeraBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               AdminMenuaVi adminMenuaframe= new AdminMenuaVi(erabiltzailea);
+                adminMenuaframe.setVisible(true);
+                setVisible(false);
+            }
+        });
 	}
 
 }

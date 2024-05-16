@@ -33,7 +33,7 @@ public class TestDBMenua {
     @Test
     public void testMusikaDescubritu() {
         List<String> expected = obtenerResultadoEsperado("SELECT IzenArtistikoa FROM musikaria");
-        List<String> actual = DBArtista.MusikaDescubritu();
+        List<String> actual = DBArtista.MusikariakDescubritu();
 
         // Hau gpt esan dit, erantzunak ordenatzeko da. Egiten duena: goranzkako ordena hartzen dute 
         Collections.sort(expected);

@@ -7,33 +7,36 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import Modelo.Bezeroa;
+import Salbuespenak.ErregistroSalbuespena;
 public class DBErregistroa {
-    public static void BezeroaGorde(Bezeroa nb) {
-        try {
-            Connection connection = Konexioa.konektatu();
-            if (connection != null) {
-                String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
-                preparedStatement.setString(1, nb.getIzena());
-                preparedStatement.setString(2, nb.getAbizena());
-                preparedStatement.setString(3, nb.getHizkuntza());
-                preparedStatement.setString(4, nb.getErabiltzailea());
-                preparedStatement.setString(5, nb.getPasahitza());
-                preparedStatement.setDate(6, new java.sql.Date(nb.getJaiotzedata().getTime()));
-                preparedStatement.setDate(7, new java.sql.Date(nb.getErregistrodata().getTime()));
-                int eragindakoErrenkadak = preparedStatement.executeUpdate();
-                if (eragindakoErrenkadak > 0) {
-                    System.out.println("Bezeroa zuzen gehitu da datu-basera.");
-                } else {
-                    System.out.println("Errorea: Ezin izan da bezeroa datu-basera gehitu.");
-                }
-                preparedStatement.close();
-                connection.close();
-            }
-        } catch (SQLException e) {
-            System.out.println("Errorea bezeroa datu-baseari eranstean: " + e.getMessage());
-        }
-    }
+	 public static void BezeroaGorde(Bezeroa nb) throws ErregistroSalbuespena {
+	        try {
+	            Connection connection = Konexioa.konektatu();
+	            if (connection != null) {
+	                String kontsulta = "INSERT INTO bezeroa (Izena, Abizena, Hizkuntza, Erabiltzailea, Pasahitza, Jaiotze_data, Erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	                PreparedStatement preparedStatement = connection.prepareStatement(kontsulta);
+	                preparedStatement.setString(1, nb.getIzena());
+	                preparedStatement.setString(2, nb.getAbizena());
+	                preparedStatement.setString(3, nb.getHizkuntza());
+	                preparedStatement.setString(4, nb.getErabiltzailea());
+	                preparedStatement.setString(5, nb.getPasahitza());
+	                preparedStatement.setDate(6, new java.sql.Date(nb.getJaiotzedata().getTime()));
+	                preparedStatement.setDate(7, new java.sql.Date(nb.getErregistrodata().getTime()));
+	                int eragindakoErrenkadak = preparedStatement.executeUpdate();
+	                if (eragindakoErrenkadak > 0) {
+	                    System.out.println("Bezeroa zuzen gehitu da datu-basera.");
+	                } else {
+	                    System.out.println("Errorea: Ezin izan da bezeroa datu-basera gehitu.");
+	                }
+	                preparedStatement.close();
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            // Salbuespena bota
+	            throw new ErregistroSalbuespena();
+	        }
+	    }
+	
     public static int idBezeroLortu(Bezeroa nb) {
         int idBezeroa = -1;
         try (Connection conn = Konexioa.konektatu();

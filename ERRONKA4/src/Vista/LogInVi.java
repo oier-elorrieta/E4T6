@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DB.DBLogIn;
+import Salbuespenak.LogInSalbuespena;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -77,7 +78,13 @@ public class LogInVi extends JFrame {
                 String erabiltzailea = textFieldErabiltzailea.getText();
                 String pasahitza = textFieldPasahitza.getText();
                 
-                boolean isLoginOk = DBLogIn.isLoginOk(erabiltzailea, pasahitza);
+                boolean isLoginOk = false;
+				try {
+					isLoginOk = DBLogIn.isLoginOk(erabiltzailea, pasahitza);
+				} catch (LogInSalbuespena e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 	if(isLoginOk == true) {
                     if(cboxAukera == 0 ) {
                 	MenuaVi menua = new MenuaVi(erabiltzailea);
