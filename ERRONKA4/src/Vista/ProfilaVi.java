@@ -69,103 +69,103 @@ public class ProfilaVi extends JFrame {
         JLabel erabiltzaileaLbl = new JLabel("Erabiltzailea:");
         erabiltzaileaLbl.setBounds(34, 36, 67, 14);
         contentPane.add(erabiltzaileaLbl);
-        
+       
         JLabel pasahitzaLbl = new JLabel("Pasahitza");
         pasahitzaLbl.setBounds(34, 59, 46, 14);
         contentPane.add(pasahitzaLbl);
-        
+       
         JLabel konfirmatuLbl = new JLabel("Konfirmatu:");
         konfirmatuLbl.setBounds(34, 84, 67, 14);
         contentPane.add(konfirmatuLbl);
-        
+       
         JLabel jaiotzeDataLbl = new JLabel("Jaiotze data:");
         jaiotzeDataLbl.setBounds(34, 109, 72, 14);
         contentPane.add(jaiotzeDataLbl);
-        
+       
         JLabel erregistroalbl = new JLabel("Erregistro data:");
         erregistroalbl.setBounds(34, 134, 79, 14);
         contentPane.add(erregistroalbl);
-        
+       
         JLabel premiumugalbl = new JLabel("Premium muga:");
         premiumugalbl.setBounds(34, 159, 79, 14);
         contentPane.add(premiumugalbl);
-        
+       
         JLabel hizkuntzaLbl = new JLabel("Hizkuntza:");
         hizkuntzaLbl.setBounds(34, 186, 67, 14);
         contentPane.add(hizkuntzaLbl);
-        
+       
         izenaTextField = new JTextField();
         izenaTextField.setBounds(72, 8, 134, 20);
         contentPane.add(izenaTextField);
         izenaTextField.setColumns(10);
-        
+       
         erabiltzaileaTextField = new JTextField();
         erabiltzaileaTextField.setColumns(10);
         erabiltzaileaTextField.setBounds(100, 33, 106, 20);
         contentPane.add(erabiltzaileaTextField);
-        
+       
         erabiltzaileaTextField.setEditable(false);
-        
+       
         pasahitzaTextField = new JTextField();
         pasahitzaTextField.setColumns(10);
         pasahitzaTextField.setBounds(90, 56, 116, 20);
         contentPane.add(pasahitzaTextField);
-        
+       
         konfirmatuTextField = new JTextField();
         konfirmatuTextField.setColumns(10);
         konfirmatuTextField.setBounds(100, 81, 106, 20);
         contentPane.add(konfirmatuTextField);
-        
+       
         jaiotzeDataTextField = new JTextField();
         jaiotzeDataTextField.setColumns(10);
         jaiotzeDataTextField.setBounds(100, 106, 106, 20);
         contentPane.add(jaiotzeDataTextField);
-        
+       
         erregistroDataTextField = new JTextField();
         erregistroDataTextField.setColumns(10);
         erregistroDataTextField.setBounds(110, 131, 96, 20);
         contentPane.add(erregistroDataTextField);
-        
+       
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date egunerakoData = new Date();
         erregistroDataTextField.setText(sdf.format(egunerakoData));
-        
+       
         premiumMugaTextField = new JTextField();
         premiumMugaTextField.setColumns(10);
         premiumMugaTextField.setBounds(120, 153, 86, 20);
         contentPane.add(premiumMugaTextField);
-        
+       
         abizenaTextField = new JTextField();
         abizenaTextField.setColumns(10);
         abizenaTextField.setBounds(289, 8, 135, 20);
         contentPane.add(abizenaTextField);
-        
+       
         JLabel abizenaLbl = new JLabel("Abizena:");
         abizenaLbl.setBounds(233, 11, 46, 14);
         contentPane.add(abizenaLbl);
-        
-        
+       
+       
         //Bezeroen informazioa erakusteko
         Bezeroa bezeroa = DBProfila.bezeroaLortu(Erabiltzailea);
             izenaTextField.setText(bezeroa.getIzena());
             abizenaTextField.setText(bezeroa.getAbizena());
-            erabiltzaileaTextField.setText(bezeroa.getErabiltzailea());
+            erabiltzaileaTextField.setText(bezeroa.getIzena());
             pasahitzaTextField.setText(bezeroa.getPasahitza());
-            jaiotzeDataTextField.setText(bezeroa.getJaiotzedata().toString()); 
+            jaiotzeDataTextField.setText(bezeroa.getJaiotzedata().toString());
             erregistroDataTextField.setText(bezeroa.getErregistrodata().toString());
-            premiumMugaTextField.setText(""); 
-            
-            
+            premiumMugaTextField.setText("");
            
-            
+           
+           
+           
         JButton editatuGordeBtn = new JButton("Aldaketak Gorde");
         editatuGordeBtn.setBounds(123, 227, 156, 23);
         contentPane.add(editatuGordeBtn);
         editatuGordeBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
-            	
-            	
+           
+           
+           
                 String izena = izenaTextField.getText();
                 String abizena = abizenaTextField.getText();
                 String erabiltzailea = erabiltzaileaTextField.getText();
@@ -189,8 +189,8 @@ public class ProfilaVi extends JFrame {
 
                 Bezeroa nb = new Bezeroa(izena, abizena, hizkuntza, erabiltzailea, pasahitza, jaiotzeDate, erregistroDate);
 
-                if(DBProfila.bezKomparaketa(bezeroa, nb) == false){ 
-                	DBProfila.aktualizatuBezeroa(nb, Erabiltzailea);         
+                if(DBProfila.bezKomparaketa(bezeroa, nb) == false){
+                DBProfila.aktualizatuBezeroa(nb, Erabiltzailea);        
         }
             }
         });

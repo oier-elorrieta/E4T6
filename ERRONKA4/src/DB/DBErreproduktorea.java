@@ -45,23 +45,15 @@ public class DBErreproduktorea {
                     Clip clip = AudioSystem.getClip();
                     clip.open(AudioSystem.getAudioInputStream(camaronFile));
 
-                    // Agregar un LineListener para detectar cuando el audio termina de reproducirse
                     clip.addLineListener(new LineListener() {
                         public void update(LineEvent event) {
                             if (event.getType() == LineEvent.Type.STOP) {
-                                // Aquí puedes llamar a un método para cambiar de frame
-                                // Por ejemplo:
-                                // cambiarDeFrame();
-                                System.out.println("Audio terminado. Cambiar de frame aquí.");
+
                             }
                         }
                     });
-
                     clip.start();
-                    
-                    
-                    
-                    
+
                 } else {
                     System.out.println("camaron.wav ez da aurkitu");
                 }
@@ -142,19 +134,15 @@ public class DBErreproduktorea {
 
         try (Connection conn = Konexioa.konektatu();
              PreparedStatement stmt = conn.prepareStatement("SELECT mota FROM audio WHERE IDAudio = ?")) {
-            
             stmt.setInt(1, cboxAbestia);
-            
             ResultSet rs = stmt.executeQuery();
-            
             if (rs.next()) {
                 mota = rs.getString("mota");
             }
         } catch (SQLException e) {
             System.err.println("Datu-basearen errorea: " + e.getMessage());
         }
-        
-        
+
         return mota;
     }
     
@@ -183,37 +171,21 @@ public class DBErreproduktorea {
     public static void aktualizatuPlayList(String aukeratutakoPlayList, int erreproduzitzenDagoenAbestia) {
 
         try (Connection conn = Konexioa.konektatu();
-
              PreparedStatement stmt = conn.prepareStatement("INSERT INTO PLaylist_Abestiak (IDList, IDAudio) VALUES ((SELECT IDList FROM Playlist WHERE Izenburua = ?), ?)")) {
-
             stmt.setString(1, aukeratutakoPlayList); // Aukeratutako zerrendaren izena
-
             stmt.setInt(2, erreproduzitzenDagoenAbestia); // Gehitu nahi den abestiaren IDa
-
             int erregistroakAldatutakoak = stmt.executeUpdate();
-
             if (erregistroakAldatutakoak == 0) {
-
                 throw new SQLException("Errorea playlist-a gehitzean: Erregistroa ezin da aldatu");
-
             } else {
-
                 System.out.println("Playlist-a gehitu da.");
-
             }
-
         } catch (SQLException e) {
-
             System.err.println("Datu-basearen errorea: " + e.getMessage());
-
-            JOptionPane.showMessageDialog(null, "Datu-basearen errorea: Abesti hau jada playlist-ean gehitu da", "Errorea", JOptionPane.ERROR_MESSAGE);        }
-
+           JOptionPane.showMessageDialog(null, "Datu-basearen errorea: Abesti hau jada playlist-ean gehitu da", "Errorea", JOptionPane.ERROR_MESSAGE);        }
     }
-    
-    
-    
-  //Gustoko botoia
 
+  //Gustoko botoia
     public static void gustokoakPlayList(int erreproduzitzenDagoenAbestia) {
         try (Connection conn = Konexioa.konektatu();
              PreparedStatement stmt = conn.prepareStatement("INSERT INTO Gustukoak (IDBezeroa, IDAudio) VALUES (?, ?)")) {
@@ -231,8 +203,5 @@ public class DBErreproduktorea {
             JOptionPane.showMessageDialog(null, "Datu-basearen errorea: Abesti hau jada gustokoak-listan gehitu da", "Errorea", JOptionPane.ERROR_MESSAGE);
 
         }
-
-    }
-    
-    
+    } 
 }
