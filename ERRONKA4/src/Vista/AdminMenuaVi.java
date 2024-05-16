@@ -8,12 +8,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MenuaVi extends JFrame {
+public class AdminMenuaVi extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    public MenuaVi(String erabiltzailea) {
+    public AdminMenuaVi(String erabiltzailea) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -21,60 +21,44 @@ public class MenuaVi extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JButton MusikaDeskubrituBtn = new JButton("Musika Deskubritu");
+        JButton MusikaDeskubrituBtn = new JButton("Musika Kudeatu");
         MusikaDeskubrituBtn.setBounds(130, 61, 155, 23);
         contentPane.add(MusikaDeskubrituBtn);
         MusikaDeskubrituBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ArtistaListVi ArtistaListFrame = new ArtistaListVi(erabiltzailea);
-                ArtistaListFrame.setVisible(true);
+                MusikaKudeatzaileaVi musikaKudeatzaileaFrame = new MusikaKudeatzaileaVi(erabiltzailea);
+                musikaKudeatzaileaFrame.setVisible(true);
                 setVisible(false);
             }
         });
 
-        JButton PodcastBtn = new JButton("Podcastak deskubritu");
+        JButton PodcastBtn = new JButton("Podcastak kudeatu");
         PodcastBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                PodcasterrakVi podcasterrakFrame = new PodcasterrakVi(erabiltzailea);
-                podcasterrakFrame.setVisible(true);
+            	 PodcastKudeatzaileaVi podcastKudeatzaileaFrame = new PodcastKudeatzaileaVi(erabiltzailea);
+                podcastKudeatzaileaFrame.setVisible(true);
+                 setVisible(false);
             }
         });
         PodcastBtn.setBounds(130, 107, 155, 23);
         contentPane.add(PodcastBtn);
 
-        JButton NirePlaylistBtn = new JButton("Nire PLaylist-ak");
+        JButton NirePlaylistBtn = new JButton("Estatistikak");
         NirePlaylistBtn.setBounds(130, 155, 155, 23);
         contentPane.add(NirePlaylistBtn);
 
         NirePlaylistBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-               
+             
             }
         });
 
         JLabel AukeratuLbl = new JLabel("AUKERATU");
-        AukeratuLbl.setBounds(179, 25, 59, 14);
+        AukeratuLbl.setBounds(174, 25, 106, 14);
         contentPane.add(AukeratuLbl);
 
         JButton AtzeraBotoia = new JButton("Atzera");
-        AtzeraBotoia.setBounds(27, 209, 89, 23);
+        AtzeraBotoia.setBounds(163, 227, 89, 23);
         contentPane.add(AtzeraBotoia);
-
-        AtzeraBotoia.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	 LogInVi loginframe = new LogInVi();
-                 loginframe.setVisible(true);
-            }
-        });
-
-        JButton btnNewButton_1 = new JButton(erabiltzailea);
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ProfilaVi profilaFrame = new ProfilaVi(erabiltzailea);
-                profilaFrame.setVisible(true);
-            }
-        });
-        btnNewButton_1.setBounds(317, 209, 89, 23);
-        contentPane.add(btnNewButton_1);
     }
 }

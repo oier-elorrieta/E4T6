@@ -8,6 +8,7 @@ import DB.DBLogIn;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
@@ -21,6 +22,7 @@ public class LogInVi extends JFrame {
     private JPanel contentPane;
     private JTextField textFieldErabiltzailea;
     private JTextField textFieldPasahitza;
+    private int cboxAukera;
 
     public LogInVi() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,10 +57,19 @@ public class LogInVi extends JFrame {
         Izenburualbl.setBounds(187, 11, 70, 20);
         contentPane.add(Izenburualbl);
         
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Bezero", "Admin"}));
-        comboBox.setBounds(140, 171, 129, 22);
-        contentPane.add(comboBox);
+        JComboBox bezEdoAdminCbox = new JComboBox();
+        bezEdoAdminCbox.setModel(new DefaultComboBoxModel(new String[] {"Bezero", "Admin"}));
+        bezEdoAdminCbox.setBounds(140, 171, 129, 22);
+        contentPane.add(bezEdoAdminCbox);
+        
+        bezEdoAdminCbox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+               
+            	cboxAukera =  bezEdoAdminCbox.getSelectedIndex();
+                
+                
+            }
+        });
         
         JButton LogInBotoia = new JButton("LogIn");
         LogInBotoia.addActionListener(new ActionListener() {
@@ -66,12 +77,16 @@ public class LogInVi extends JFrame {
                 String erabiltzailea = textFieldErabiltzailea.getText();
                 String pasahitza = textFieldPasahitza.getText();
                 
-                boolean isloginok = DBLogIn.isLoginOk(erabiltzailea, pasahitza);
-        
-                if(isloginok) {
-                    MenuaVi menua = new MenuaVi(erabiltzailea);
+                boolean isLoginOk = DBLogIn.isLoginOk(erabiltzailea, pasahitza);
+                	if(isLoginOk == true) {
+                    if(cboxAukera == 0 ) {
+                	MenuaVi menua = new MenuaVi(erabiltzailea);
                     menua.setVisible(true);
-                }
+                    }else if(cboxAukera == 1){
+                    	AdminMenuaVi adminMenuaFrame = new AdminMenuaVi(erabiltzailea);
+                        adminMenuaFrame.setVisible(true);
+                    }
+                	}
             }
         });
                     
